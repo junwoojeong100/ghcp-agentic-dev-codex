@@ -1,0 +1,5 @@
+.build/
+.demo-runs/
+.playwright-mcp/
+node_modules/
+.DS_Store

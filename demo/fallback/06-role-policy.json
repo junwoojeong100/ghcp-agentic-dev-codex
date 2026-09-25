@@ -1,0 +1,8 @@
+{
+  "kind": "synthetic-demo-design-choice",
+  "humanApproval": false,
+  "decision": "Only support actors can initiate refunds. Approvers decide another actor's pending request.",
+  "reason": "Resolve the recorded UI/API mismatch using the existing UI policy and the minimum required permissions, without expanding fixtures or integrations.",
+  "serverContract": "403 REQUESTER_REQUIRED plus a blocked audit event for approver initiation; preserve 409 for duplicate or terminal-state transitions.",
+  "release": "hold"
+}

@@ -1,0 +1,244 @@
+$ git diff --check
+exitCode=0
+
+$ node --test --test-reporter=tap test/refunds.test.mjs
+exitCode=0
+TAP version 13
+# Subtest: GET returns four synthetic refunds and their original amounts
+ok 1 - GET returns four synthetic refunds and their original amounts
+  ---
+  duration_ms: 2.060416
+  type: 'test'
+  ...
+# Subtest: low-value refunds preserve immediate simulated completion
+ok 2 - low-value refunds preserve immediate simulated completion
+  ---
+  duration_ms: 6.394
+  type: 'test'
+  ...
+# Subtest: responses do not expose mutable internal state
+ok 3 - responses do not expose mutable internal state
+  ---
+  duration_ms: 0.293375
+  type: 'test'
+  ...
+# Subtest: unknown actor and unsupported fields are rejected
+ok 4 - unknown actor and unsupported fields are rejected
+  ---
+  duration_ms: 0.229709
+  type: 'test'
+  ...
+# Subtest: identified amount tampering and unknown fields are blocked and audited
+ok 5 - identified amount tampering and unknown fields are blocked and audited
+  ---
+  duration_ms: 0.339583
+  type: 'test'
+  ...
+# Subtest: routes and methods are checked explicitly
+ok 6 - routes and methods are checked explicitly
+  ---
+  duration_ms: 0.115041
+  type: 'test'
+  ...
+# Subtest: processing the same request twice cannot complete it twice
+ok 7 - processing the same request twice cannot complete it twice
+  ---
+  duration_ms: 0.243042
+  type: 'test'
+  ...
+# Subtest: demo reset and separate service instances isolate state
+ok 8 - demo reset and separate service instances isolate state
+  ---
+  duration_ms: 0.718792
+  type: 'test'
+  ...
+# Subtest: the threshold is enforced and pending totals come from refund state
+ok 9 - the threshold is enforced and pending totals come from refund state
+  ---
+  duration_ms: 0.621333
+  type: 'test'
+  ...
+# Subtest: a pending request cannot be processed again or mutated
+ok 10 - a pending request cannot be processed again or mutated
+  ---
+  duration_ms: 0.636875
+  type: 'test'
+  ...
+# Subtest: only support actors can start processing while repeat state errors keep priority
+ok 11 - only support actors can start processing while repeat state errors keep priority
+  ---
+  duration_ms: 0.390042
+  type: 'test'
+  ...
+# Subtest: requesters and other support actors cannot decide a high-value refund
+ok 12 - requesters and other support actors cannot decide a high-value refund
+  ---
+  duration_ms: 0.258667
+  type: 'test'
+  ...
+# Subtest: a different approver can approve and terminal actions stay terminal
+ok 13 - a different approver can approve and terminal actions stay terminal
+  ---
+  duration_ms: 0.10425
+  type: 'test'
+  ...
+# Subtest: rejection requires a trimmed 1 to 200 character reason
+ok 14 - rejection requires a trimmed 1 to 200 character reason
+  ---
+  duration_ms: 0.176541
+  type: 'test'
+  ...
+# Subtest: audit events include allowed and blocked actions and reset their sequence
+ok 15 - audit events include allowed and blocked actions and reset their sequence
+  ---
+  duration_ms: 0.276042
+  type: 'test'
+  ...
+# Subtest: reset uses the service's isolated baseline even if the caller mutates its seed
+ok 16 - reset uses the service's isolated baseline even if the caller mutates its seed
+  ---
+  duration_ms: 0.105958
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 75.089291
+
+$ node --test --test-reporter=tap $DEMO/refund-acceptance.test.mjs
+exitCode=0
+TAP version 13
+# Subtest: AC-1: policy, fixture values and total amount remain explicit
+ok 1 - AC-1: policy, fixture values and total amount remain explicit
+  ---
+  duration_ms: 1.765917
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 35000 KRW
+ok 2 - AC-1: threshold behavior at 35000 KRW
+  ---
+  duration_ms: 1.267792
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 999999 KRW
+ok 3 - AC-1: threshold behavior at 999999 KRW
+  ---
+  duration_ms: 0.210417
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 1000000 KRW
+ok 4 - AC-1: threshold behavior at 1000000 KRW
+  ---
+  duration_ms: 0.1465
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 1200000 KRW
+ok 5 - AC-1: threshold behavior at 1200000 KRW
+  ---
+  duration_ms: 0.26225
+  type: 'test'
+  ...
+# Subtest: AC-2: a pending refund cannot be completed by requesting again
+ok 6 - AC-2: a pending refund cannot be completed by requesting again
+  ---
+  duration_ms: 0.427042
+  type: 'test'
+  ...
+# Subtest: AC-3: self approve is rejected by the service
+ok 7 - AC-3: self approve is rejected by the service
+  ---
+  duration_ms: 0.358042
+  type: 'test'
+  ...
+# Subtest: AC-3: other support actor cannot approve
+ok 8 - AC-3: other support actor cannot approve
+  ---
+  duration_ms: 0.189834
+  type: 'test'
+  ...
+# Subtest: AC-3: self reject is rejected by the service
+ok 9 - AC-3: self reject is rejected by the service
+  ---
+  duration_ms: 0.623042
+  type: 'test'
+  ...
+# Subtest: AC-3: other support actor cannot reject
+ok 10 - AC-3: other support actor cannot reject
+  ---
+  duration_ms: 0.536084
+  type: 'test'
+  ...
+# Subtest: AC-3: initiation is limited to support roles, consistently with the UI
+ok 11 - AC-3: initiation is limited to support roles, consistently with the UI
+  ---
+  duration_ms: 0.328792
+  type: 'test'
+  ...
+# Subtest: AC-4: a different approver completes exactly once
+ok 12 - AC-4: a different approver completes exactly once
+  ---
+  duration_ms: 0.351709
+  type: 'test'
+  ...
+# Subtest: AC-4: rejection requires a reason and is terminal
+ok 13 - AC-4: rejection requires a reason and is terminal
+  ---
+  duration_ms: 0.304833
+  type: 'test'
+  ...
+# Subtest: AC-4: decisions cannot precede an approval request
+ok 14 - AC-4: decisions cannot precede an approval request
+  ---
+  duration_ms: 0.070541
+  type: 'test'
+  ...
+# Subtest: AC-5: audit records preserve actor, amount, outcome, order and timestamp
+ok 15 - AC-5: audit records preserve actor, amount, outcome, order and timestamp
+  ---
+  duration_ms: 0.292667
+  type: 'test'
+  ...
+# Subtest: AC-6: executive metrics derive from actual pending and completed state
+ok 16 - AC-6: executive metrics derive from actual pending and completed state
+  ---
+  duration_ms: 0.116541
+  type: 'test'
+  ...
+# Subtest: AC-7: actor and amount spoofing cannot bypass the policy
+ok 17 - AC-7: actor and amount spoofing cannot bypass the policy
+  ---
+  duration_ms: 0.18525
+  type: 'test'
+  ...
+# Subtest: AC-7: external mutation cannot change refunds, actors or audit entries
+ok 18 - AC-7: external mutation cannot change refunds, actors or audit entries
+  ---
+  duration_ms: 0.111875
+  type: 'test'
+  ...
+# Subtest: AC-8: reset restores state and event sequence while instances stay isolated
+ok 19 - AC-8: reset restores state and event sequence while instances stay isolated
+  ---
+  duration_ms: 0.212
+  type: 'test'
+  ...
+# Subtest: HTTP integration: real routes, assets, policy, blocked and approved requests
+ok 20 - HTTP integration: real routes, assets, policy, blocked and approved requests
+  ---
+  duration_ms: 59.318334
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 180.225792

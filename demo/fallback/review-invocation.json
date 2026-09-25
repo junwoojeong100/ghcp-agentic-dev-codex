@@ -1,0 +1,28 @@
+{
+  "stage": "review",
+  "agent": "agentic-demo-reviewer",
+  "startedAt": "2026-09-25T23:24:57.061Z",
+  "version": "GitHub Copilot CLI 1.0.88.",
+  "args": [
+    "--agent",
+    "agentic-demo-reviewer",
+    "--silent",
+    "--stream",
+    "off",
+    "--no-color",
+    "--disable-builtin-mcps",
+    "--no-custom-instructions",
+    "--no-ask-user",
+    "--no-remote",
+    "--no-remote-export",
+    "--disallow-temp-dir",
+    "--available-tools",
+    "view",
+    "glob",
+    "grep",
+    "--prompt",
+    "request.md, 승인된 계획, handoff/change.diff, handoff/03-verification.json, handoff/03-tests.log와 실제 변경 파일을 읽고 검토하세요. 증거와 추정을 구분하고 파일/줄을 명시하세요. 코드를 바꾸거나 테스트를 직접 실행했다고 주장하지 마세요. 병합 승인 권한은 없습니다."
+  ],
+  "endedAt": "2026-09-25T23:27:00.390Z",
+  "exitCode": 0
+}

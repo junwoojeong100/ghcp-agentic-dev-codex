@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>환불 운영 센터 · GitHub Copilot Demo</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">NOVA<span>COMMERCE / 가상 기업</span></div>
+    <div class="nav-label">OPERATIONS</div>
+    <div class="nav-item">운영 개요</div>
+    <div class="nav-item active">환불 운영 센터</div>
+    <div class="nav-item">정산 관리</div>
+    <div class="sidebar-note"><strong>GitHub Copilot</strong><br>Agentic Development in Action<br><br>이 화면은 시연용 업무 앱입니다.<br>Copilot 제품 UI가 아닙니다.</div>
+  </aside>
+  <main>
+    <header>
+      <div><div class="eyebrow">CUSTOMER OPERATIONS</div><h1>환불 운영 센터</h1><p class="subtitle">고객 대응 속도와 환불 통제를 함께 확인합니다.</p></div>
+      <div class="operator"><label for="actor">시연용 역할 선택 · 실제 인증 아님</label><select id="actor" aria-label="시연용 역할"></select></div>
+    </header>
+    <section class="policy-banner warning" id="policy-banner" aria-label="환불 정책">
+      <div><span class="policy-label">BEFORE</span><h2>고액 환불도 승인 없이 처리됩니다</h2><p id="policy-description">금액과 무관하게 같은 담당자가 바로 처리하는 현재 업무 흐름입니다.</p></div>
+      <span class="policy-amount">100만 원 이상<br><strong>승인 통제 없음</strong></span>
+    </section>
+    <section class="metrics" aria-label="현재 처리 현황">
+      <div><span>전체 환불 요청</span><strong id="total-count">-</strong><small>합성 데이터</small></div>
+      <div><span>승인 대기 금액</span><strong id="pending-amount">-</strong><small id="pending-count">승인 워크플로 없음</small></div>
+      <div><span>처리 완료</span><strong id="completed-count">-</strong><small>실제 금전 이동 없음</small></div>
+      <div><span>감사 이벤트</span><strong id="event-count">-</strong><small>메모리 내 시연용 기록</small></div>
+    </section>
+    <div class="section-heading"><div><h2>환불 요청</h2><p>RF-2401의 120만 원 환불로 변경 전후를 비교합니다.</p></div><button id="reset" class="secondary">데모 초기화</button></div>
+    <div id="notice" role="status" aria-live="polite">로컬 데이터를 불러오는 중입니다.</div>
+    <section class="table-wrap" aria-label="환불 목록">
+      <table><thead><tr><th>고객 / 요청</th><th>환불 금액</th><th>사유</th><th>상태</th><th>업무 처리</th></tr></thead><tbody id="refund-rows"></tbody></table>
+    </section>
+    <section class="audit-section" aria-label="감사 기록">
+      <div class="section-heading"><div><h2>감사 타임라인</h2><p>누가, 언제, 어떤 결정을 했는지 확인하는 화면입니다.</p></div><span class="subtle">서버 재시작 시 초기화</span></div>
+      <div id="audit-events" class="audit-empty">현재 버전에는 승인 이력과 차단 시도 기록이 없습니다.</div>
+    </section>
+    <footer><span id="run-mode">로컬 합성 데이터</span><span>결제 연동 없음 · 운영용 인증 및 영구 감사 저장소 없음</span></footer>
+  </main>
+  <script type="module" src="/app.mjs"></script>
+</body>
+</html>

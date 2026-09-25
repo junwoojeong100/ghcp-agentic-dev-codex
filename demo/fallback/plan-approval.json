@@ -1,0 +1,18 @@
+{
+  "decision": "approve-plan",
+  "kind": "simulated-rehearsal",
+  "by": "rehearsal-automation",
+  "at": "2026-09-25T23:05:00.134Z",
+  "planHash": "b830aa780137426d40942b5c0a4b0df6c4a851925025875a1427db7a25befa89",
+  "baselineDigest": "b731d7d224a7913eca5d2c49f41af7dc543216a40a05e0f5f6a6a81f96153f81",
+  "allowedFiles": [
+    "README.md",
+    "src/refunds.mjs",
+    "public/index.html",
+    "public/app.mjs",
+    "public/styles.css",
+    "test/refunds.test.mjs"
+  ],
+  "scope": "Synthetic local app only; no real payment, remote PR, merge or deployment.",
+  "identityNote": "Automated rehearsal acceptance, not human approval."
+}

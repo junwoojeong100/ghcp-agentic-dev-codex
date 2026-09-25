@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "mode": "rehearsal",
+  "at": "2026-09-25T23:08:08.724Z",
+  "node": "v22.16.0",
+  "platform": "darwin/arm64",
+  "sourceDigest": "99dc7942577fdb3639787d3427435cc2af28ac9f4ddbb4d1cdf9489c498852ab",
+  "diffSha256": "430e4e452552bb37e415d54b5cde9afcaad2de8fe8d7d189014af94373d8c881",
+  "testLogSha256": "da1b679fdc63ba20d6aea57f32471ba2408454234aa6bdd69f3f8b21fa7ce768",
+  "acceptanceSha256": "208e92f68522b863bd6b702fdae9f76cacb3ba37c33d3c6da3ceb15b124e7c79",
+  "changedFiles": [
+    "README.md",
+    "public/app.mjs",
+    "public/index.html",
+    "public/styles.css",
+    "src/refunds.mjs",
+    "test/refunds.test.mjs"
+  ],
+  "workspaceUnchangedDuringTests": true,
+  "success": false,
+  "checks": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "tests": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "test/refunds.test.mjs"
+      ],
+      "exitCode": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "$DEMO/refund-acceptance.test.mjs"
+      ],
+      "exitCode": 1,
+      "tests": 20,
+      "passed": 19,
+      "failed": 1
+    }
+  ],
+  "boundary": "Local tests only. No GitHub Actions run, PR approval, merge or deployment.",
+  "originalTestLogSha256": "59aaad216013327c524306fff04eafdcbac82e8f3fe759728f96603605ce1660",
+  "pathNormalization": "Absolute local paths were replaced; testLogSha256 identifies the distributed log. The original digest is retained separately."
+}

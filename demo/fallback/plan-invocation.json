@@ -1,0 +1,28 @@
+{
+  "stage": "plan",
+  "agent": "agentic-demo-planner",
+  "startedAt": "2026-09-25T23:02:35.344Z",
+  "version": "GitHub Copilot CLI 1.0.88.",
+  "args": [
+    "--agent",
+    "agentic-demo-planner",
+    "--silent",
+    "--stream",
+    "off",
+    "--no-color",
+    "--disable-builtin-mcps",
+    "--no-custom-instructions",
+    "--no-ask-user",
+    "--no-remote",
+    "--no-remote-export",
+    "--disallow-temp-dir",
+    "--available-tools",
+    "view",
+    "glob",
+    "grep",
+    "--prompt",
+    "request.md와 현재 코드를 읽고 이 변경 요청의 계획만 작성하세요. 파일을 수정하거나 테스트를 실행하지 마세요. 계획 결과는 다음 역할에 파일로 전달하며 사람이 먼저 승인합니다."
+  ],
+  "endedAt": "2026-09-25T23:02:56.910Z",
+  "exitCode": 0
+}

@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: GET returns four synthetic refunds and their original amounts
+ok 1 - GET returns four synthetic refunds and their original amounts
+  ---
+  duration_ms: 0.711917
+  type: 'test'
+  ...
+# Subtest: low-value refunds preserve immediate simulated completion
+ok 2 - low-value refunds preserve immediate simulated completion
+  ---
+  duration_ms: 0.66775
+  type: 'test'
+  ...
+# Subtest: responses do not expose mutable internal state
+ok 3 - responses do not expose mutable internal state
+  ---
+  duration_ms: 0.11275
+  type: 'test'
+  ...
+# Subtest: unknown actor and unsupported fields are rejected
+ok 4 - unknown actor and unsupported fields are rejected
+  ---
+  duration_ms: 0.153292
+  type: 'test'
+  ...
+# Subtest: routes and methods are checked explicitly
+ok 5 - routes and methods are checked explicitly
+  ---
+  duration_ms: 0.14225
+  type: 'test'
+  ...
+# Subtest: processing the same request twice cannot complete it twice
+ok 6 - processing the same request twice cannot complete it twice
+  ---
+  duration_ms: 0.085042
+  type: 'test'
+  ...
+# Subtest: demo reset and separate service instances isolate state
+ok 7 - demo reset and separate service instances isolate state
+  ---
+  duration_ms: 0.148584
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 38.111042

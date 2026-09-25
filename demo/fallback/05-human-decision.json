@@ -1,0 +1,11 @@
+{
+  "by": "rehearsal-automation",
+  "decision": "hold",
+  "reason": "실제 인증·결제·영구 감사 저장소와 사람의 출시 검토는 범위 밖이며 승인하지 않음",
+  "kind": "simulated-rehearsal",
+  "at": "2026-09-25T23:27:47.507Z",
+  "sourceDigest": "2f1aeab5515690f28f59a6f07220c80585d7314cb80fdf8f1dad2e29ed8150a9",
+  "reviewHash": "b330637dbf7384cd992a30ed738349a9cb97ccf804e6b61bfa6d0319c707524f",
+  "remoteAction": "none",
+  "identityNote": "Automated rehearsal hold. Human release approval remains pending."
+}

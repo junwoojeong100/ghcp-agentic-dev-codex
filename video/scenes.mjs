@@ -1,0 +1,76 @@
+export const scenes = [
+  {
+    id: "01-opening", duration: 14, source: "slide-1", chapter: "경영진의 요청을 제품 변경으로",
+    narration: "백이십만 원 환불이 클릭 한 번으로 완료된다면, 우리 조직은 어디에서 통제해야 할까요? 깃허브 코파일럿이 경영진의 요청을 실제 제품 변경과 검토 자료로 연결하는 과정을 보겠습니다.",
+  },
+  {
+    id: "02-before", duration: 16, source: "before-full", chapter: "변경 전 · 승인 통제가 없는 업무",
+    narration: "가상 기업의 환불 운영 화면입니다. 고객도, 금액도 시연용 합성 데이터입니다. 현재는 담당자가 금액과 관계없이 바로 환불을 처리할 수 있습니다. 백이십만 원 요청을 선택해 보겠습니다.",
+  },
+  {
+    id: "03-before-action", duration: 13, source: "before-process", motion: true, chapter: "변경 전 · 즉시 완료, 감사 이력 없음",
+    narration: "버튼을 누르자 바로 처리 완료가 됩니다. 누가 별도로 승인했는지 확인하는 단계도, 감사 이력도 없습니다. 실제 돈을 이동시키지 않고, 업무의 통제 공백을 재현한 장면입니다.",
+  },
+  {
+    id: "04-policy", duration: 20, source: "slide-3", chapter: "경영진의 정책 요청",
+    narration: "경영진의 요청은 분명합니다. 백만 원 이상 환불은 요청자와 다른 담당자가 승인해야 합니다. 소액 고객 대응은 기존대로 유지하고, 결정과 차단 시도를 기록해야 합니다. 코파일럿에는 이 요청과 함께 수정 범위, 완료 기준, 제외할 연동을 전달합니다.",
+  },
+  {
+    id: "05-workflow", duration: 17, source: "slide-4", chapter: "계획 · 구현 · 검증 · 검토",
+    narration: "계획 역할이 접근 방법을 만들고, 구현 역할은 그 계획을 받아 화면과 업무 로직을 변경합니다. 로컬 스크립트가 테스트를 실행하면, 검토 역할이 기록과 변경 내용을 읽습니다. 역할별 결과는 파일로 전달합니다.",
+  },
+  {
+    id: "06-plan", duration: 18, source: "evidence-plan", chapter: "실제 Copilot CLI 실행 기록 · 계획",
+    narration: "화면은 실제 코파일럿 씨엘아이의 계획 결과를 읽기 쉽게 표시한 기록입니다. 백만 원 경계, 자기 승인 차단, 감사 이력, 기존 동작 유지가 계획에 들어 있습니다. 모델에게는 읽기와 검색 도구만 제공했습니다. 제품 화면을 흉내 낸 채팅은 아닙니다.",
+  },
+  {
+    id: "07-scope", duration: 14, source: "slide-10", chapter: "사람의 통제 · 구현 범위",
+    narration: "실제 발표에서는 사람이 계획을 읽고 범위를 승인한 뒤 구현을 시작합니다. 이 영상의 사전 리허설에서는 승인 입력을 모의 처리했다고 기록했습니다. 이를 실제 사람의 승인이나 출시 허가로 표현하지 않습니다.",
+  },
+  {
+    id: "08-implementation", duration: 17, source: "evidence-implementation", chapter: "실제 변경 결과 · UI와 서버, 테스트",
+    narration: "코파일럿은 설명만 작성하지 않았습니다. 서버의 승인 규칙, 역할별 화면, 테스트와 문서를 실제로 변경했습니다. 계획과 구현 결과, 변경 내역을 함께 남깁니다. 실제 결제와 인증, 배포는 허용 범위에서 제외했습니다.",
+  },
+  {
+    id: "09-after", duration: 14, source: "after-full", chapter: "변경 후 · 정책이 업무 화면으로",
+    narration: "같은 업무 화면을 다시 보겠습니다. 백만 원 이상에는 승인 요청 버튼이 나타납니다. 대기 금액과 감사 이벤트를 확인할 수 있습니다. 변경 전과 같은 합성 데이터로 차이를 비교합니다.",
+  },
+  {
+    id: "10-request", duration: 17, source: "after-request", motion: true, chapter: "120만 원 · 완료 대신 승인 대기",
+    narration: "김지원 담당자로 백이십만 원 환불을 요청합니다. 이제 바로 완료되지 않고 승인 대기로 남습니다. 대기 금액도 백이십만 원으로 갱신됩니다. 화면의 버튼 이름뿐 아니라 서버의 상태 전이가 바뀐 것입니다.",
+  },
+  {
+    id: "11-block", duration: 20, source: "after-block", motion: true, chapter: "자기 승인 시도 · 서버에서 403 차단",
+    narration: "같은 담당자가 승인하려 하면 어떻게 될까요? 통제 검증용 버튼으로 실제 승인 요청을 보냅니다. 서버는 사공삼 오류로 거부하고 요청은 대기 상태를 유지합니다. 요청자와 승인자를 분리하는 규칙을 실제 응답으로 확인한 것입니다.",
+  },
+  {
+    id: "12-approve", duration: 18, source: "after-approve", motion: true, chapter: "다른 운영 승인자의 결정",
+    narration: "이번에는 박민서 운영 승인자 역할로 바꿉니다. 다른 담당자가 승인해야 비로소 처리 완료로 전환됩니다. 이 역할 선택은 인증 시스템이 아니라 시연 장치입니다. 실제 운영에서는 신원과 권한을 별도로 검증해야 합니다.",
+  },
+  {
+    id: "13-audit", duration: 18, source: "after-audit-full", chapter: "요청 · 차단 · 승인, 같은 타임라인에",
+    narration: "감사 타임라인에는 요청, 자기 승인 차단, 다른 담당자의 승인이 이어집니다. 누가 어떤 환불에 무엇을 했는지와 사유를 확인할 수 있습니다. 이 기록은 메모리 안의 시연용 데이터이며, 영구 감사 저장소를 구현한 것은 아닙니다.",
+  },
+  {
+    id: "14-small", duration: 14, source: "after-small", motion: true, chapter: "3만 5천 원 · 기존 고객 대응 유지",
+    narration: "소액 환불도 확인합니다. 삼만 오천 원은 기존처럼 바로 처리됩니다. 모든 업무에 승인 단계를 늘리지 않고, 정한 금액 경계에 맞춰 통제를 적용합니다. 기존 고객 대응을 유지하는지도 테스트합니다.",
+  },
+  {
+    id: "15-reject", duration: 17, source: "after-reject", motion: true, chapter: "승인뿐 아니라 반려도 실제 동작",
+    narration: "승인 외의 업무도 동작해야 합니다. 정확히 백만 원인 요청도 승인 대상으로 분류됩니다. 운영 승인자가 이유를 입력해 반려하면 상태와 이력이 함께 갱신됩니다. 종결한 요청을 다시 승인하거나 처리하는 시도도 차단합니다.",
+  },
+  {
+    id: "16-verify", duration: 18, source: "evidence-tests", chapter: "실패를 드러내고, 수정 후 다시 검증",
+    narration: "처음부터 모든 검증을 통과한 것은 아닙니다. 독립 인수 테스트가 감사 사유의 누락과 빈 값을 발견했습니다. 코파일럿이 의미 있는 사유를 기록하도록 보완한 뒤 다시 검증했습니다. 이 화면은 실제 로컬 실행 기록이며 운영 안전성의 보증은 아닙니다.",
+  },
+  {
+    id: "17-review", duration: 17, source: "evidence-review", chapter: "최종 검토 · 출시는 HOLD",
+    narration: "검토 역할은 변경 내용과 테스트 기록을 읽고 남은 위험을 정리합니다. 실제 인증, 결제와의 연결, 영구 저장은 아직 범위 밖입니다. 최종 상태는 출시 보류입니다. 테스트 통과와 사람의 출시 승인은 다른 판단입니다.",
+  },
+  {
+    id: "18-close", duration: 18, source: "slide-12", chapter: "GitHub Copilot · 검토 가능한 제품 변경",
+    narration: "깃허브 코파일럿의 적용 가치는 하나의 업무 요청을 검토 가능한 제품 변경까지 연결하는 데 있습니다. 역할 간 전달은 특정 에이전트 통신 규약을 뜻하지 않습니다. 먼저 되돌릴 수 있는 비운영 업무를 고르고, 범위와 출시 결정은 사람에게 남기세요.",
+  },
+];
+
+if (scenes.reduce((sum, scene) => sum + scene.duration, 0) !== 300) throw new Error("The edited video timeline must be exactly five minutes.");

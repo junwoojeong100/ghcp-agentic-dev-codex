@@ -1,0 +1,12 @@
+{
+  "name": "github-copilot-cxo-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test demo/workflow.test.mjs demo/starter/test/refunds.test.mjs",
+    "demo:before": "node demo/serve.mjs before",
+    "demo:after": "node demo/serve.mjs after"
+  }
+}
