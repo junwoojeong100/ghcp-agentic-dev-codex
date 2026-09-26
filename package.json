@@ -5,8 +5,14 @@
   "type": "module",
   "engines": { "node": ">=22" },
   "scripts": {
-    "test": "node --test demo/workflow.test.mjs demo/starter/test/refunds.test.mjs",
+    "test": "node --test demo/workflow.test.mjs demo/copilot.test.mjs demo/starter/test/refunds.test.mjs",
     "demo:before": "node demo/serve.mjs before",
-    "demo:after": "node demo/serve.mjs after"
+    "demo:after": "node demo/serve.mjs after",
+    "demo:copilot": "node demo/copilot.mjs",
+    "demo:record": "node video/capture-copilot.mjs"
+  },
+  "devDependencies": {
+    "@xterm/xterm": "6.0.0",
+    "playwright": "1.63.0"
   }
 }

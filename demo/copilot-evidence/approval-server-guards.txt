@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│ 46         if (url.pathname === "/api/demo/reset") {                                                         │
+│ 47           if (method !== "POST") return failure(405, "METHOD_NOT_ALLOWED", "POST만 지원합니다.");         │
+│ 47 -         refunds = structuredClone(seed);                                                                │
+│ 48 +         refunds = structuredClone(initialState);                                                        │
+│ 49           events = [];                                                                                    │
+│ 50           nextEventId = 1;                                                                                │
+│ 51           return { status: 200, body: state() };                                                          │
+│ ──────────────────────────────────────────────────────────────────────────────────────────────────────────── │
+│ 56                                                                                                           │
+│ 57         const action = match[2];                                                                          │
+│ 58         const validBody = body && typeof body === "object" && !Array.isArray(body);                       │
+│ 59 +       if (!validBody) return failure(400, "INVALID_REQUEST", "actorId와 reason만 지정할 수              │
+│        있습니다.");                                                                                          │
+│ 60         const actor = validBody ? actors.find((item) => item.id === body.actorId) : undefined;            │
+│ 61         if (!actor) return failure(401, "UNKNOWN_ACTOR", "시연용 역할을 선택해 주세요.");                 │
+│ 62         const refund = refunds.find((item) => item.id === match[1]);                                      │
+│                                                                                                              │
+│ Do you want to update /Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/src/ │
+│ refunds.mjs?                                                                                                 │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. Yes, and don't ask again for file operations when in this repo (~/GitHub/.../workspace)                 │
+│   3. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

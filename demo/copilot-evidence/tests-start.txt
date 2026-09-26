@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+ ● Edit  Edit public/index.html  Edit public/styles.css  Edit README.md                                 2m 17s ┃
+ ● Edit  Edit src/refunds.mjs                                                                              48s ┃
+                                                                                                               ┃
+ ❯ Thought for 5s                                                                                              ┃
+                                                                                                               ┃
+ ● Edit  Edit test/refunds.test.mjs                                                                        59s ┃
+                                                                                                               ┃
+ $ Shell Run refund service tests                                                                       1m 30s ┃
+   node --test --test-reporter=tap test/refunds.test.mjs                                                       ┃
+ $ Shell Run immutable acceptance tests                                                                 1m 30s ┃
+   DEMO_APP_ROOT="$PWD" node --test --test-reporter=tap test/acceptance.test.mjs                               ┃
+                                                                                                               ┃
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Run immutable acceptance tests                                                                               │
+│ ──────────────────────────────────────────────────────────────────────────────────────────────────────────── │
+│ ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────╮ │
+│ │ DEMO_APP_ROOT="$PWD" node --test --test-reporter=tap test/acceptance.test.mjs                            │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                              │
+│ Do you want to run this command?                                                                             │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

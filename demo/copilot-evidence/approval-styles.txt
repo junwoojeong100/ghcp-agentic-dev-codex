@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│ 61     .badge { display: inline-block; border-radius: 4px; padding: 6px 8px; font-size: 10px; color:         │
+│        #6a768b; background: #eff2f8; white-space: nowrap; }                                                  │
+│ 62     .badge.pending_approval { background: #fff0d8; color: #98641c; }                                      │
+│ ──────────────────────────────────────────────────────────────────────────────────────────────────────────── │
+│ 69     .event-time { font-size: 10px; color: #8b94a6; width: 75px; flex-shrink: 0; }                         │
+│ 70     .event-text { flex: 1; line-height: 1.65; }                                                           │
+│ 71     .event-text strong { color: #364052; }                                                                │
+│ 72 +   .audit-list { display: grid; gap: 8px; }                                                              │
+│ 73     footer { margin-top: 27px; display: flex; justify-content: space-between; font-size: 10px; gap:       │
+│        20px; color: #96a0b3; }                                                                               │
+│ 74     @media (max-width: 1100px) { .sidebar { width: 170px; padding: 25px 18px; } main { margin-left:       │
+│        170px; width: calc(100% - 170px); padding: 26px; } .sidebar-note { left: 18px; } .metrics > div       │
+│        { padding: 0 12px; } .metrics strong { font-size: 20px; } th, td { padding: 14px 10px; } }            │
+│ 75     @media (max-width: 760px) { .sidebar { display: none; } main { width: 100%; margin: 0; padding:       │
+│        20px; } header { flex-wrap: wrap; } .metrics { grid-template-columns: repeat(2, 1fr); gap:            │
+│        18px; } .policy-amount { display: none; } }                                                           │
+│                                                                                                              │
+│ Do you want to update /Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/     │
+│ public/styles.css?                                                                                           │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. Yes, and don't ask again for file operations when in this repo (~/GitHub/.../workspace)                 │
+│   3. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

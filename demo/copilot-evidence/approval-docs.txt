@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│        중복·종료 상태 작업, 자기 승인 및 역할 위반은 명확한 오류로 거부하고 식별된 actor의 유효한 업무       │
+│        시도는 감사 이벤트로 남긴다.                                                                          │
+│ 22 +   `POST /api/demo/reset`은 환불, 감사 이벤트와 이벤트 순번을 초기화한다. 서비스 인스턴스의 상태는 서로  │
+│        격리된다.                                                                                             │
+│ 23                                                                                                           │
+│ 24     ## 반드시 구분할 경계                                                                                 │
+│ 25                                                                                                           │
+│ 26 -   역할 선택은 실제 사용자 인증이 아니다. 추가할 감사 이력도 이 데모에서는 메모리에만 저장한다.          │
+│ 26 +   역할 선택은 실제 사용자 인증이 아니다. 감사 이력은 이 데모에서 메모리에만 저장되며 재시작하면         │
+│        사라진다.                                                                                             │
+│ 27 +   승인 대기 금액은 현재 상태의 합계이지 절감액이나 예방 성과가 아니다. 승인 완료도 실제 금전 이동을     │
+│        수행하지 않는다.                                                                                      │
+│ 28     이 앱은 Copilot 제품 UI가 아니다. 개발 역할의 검토는 GitHub Copilot code review 제품의 시연과         │
+│        다르다.                                                                                               │
+│ 29     GitHub PR, GitHub Actions, 병합, 배포, Copilot Studio, A2A 프로토콜 연결을 실행하지 않는다.           │
+│ 30                                                                                                           │
+│                                                                                                              │
+│ Do you want to update /Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/     │
+│ README.md?                                                                                                   │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. Yes, and don't ask again for file operations when in this repo (~/GitHub/.../workspace)                 │
+│   3. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

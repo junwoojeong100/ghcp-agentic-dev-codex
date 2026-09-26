@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│  ╭─╮╭─╮                            │  Getting started                                                      │ ┃
+│  ╰─╯╰─╯  Copilot v1.0.88 uses AI.  │  Use the tabs above to explore your sessions and pull requests        │ ┃
+│  █ ▘▝ █  Check for mistakes.       │  /init — Initialize Copilot instructions for this repository          │ ┃
+│   ▔▔▔▔                             │  /model — Switch models across providers, or use Auto                 │ ┃
+│                                                                                                            │ ┃
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ ┃
+                                                                                                               ┃
+ ● Tip: /app                                                                                                   ┃
+   └ Prefer a visual workspace? Try out the GitHub Copilot desktop app                                         ┃
+      https://github.com/features/ai/github-app                                                                ┃
+                                                                                                               ┃
+ ● Disabled tools: fetch_copilot_cli_documentation, list_bash, session_store_sql, skill, sql, web_fetch,       ┃
+   write_agent                                                                                                 ┃
+                                                                                                               ┃
+ ● MCP Servers reloaded: 0 servers connected                                                                   ┃
+                                                                                                               ┃
+ ❯ 120만 원 환불이 승인 없이 바로 완료되는 문제를 해결해 주세요. .github/copilot-instructions.md,        11:25 ┃
+   request.md와 현재 코드를 읽고 원인과 간결한 4단계 계획을 먼저 제시해 주세요. 100만 원 이상은 다른           ┃
+   운영 승인자가 결정하고, 소액 처리는 유지하며, 요청·차단·결정은 감사 이력에 남겨야 합니다. 범위와 완료       ┃
+   기준을 확인한 뒤 구현 전 제 승인을 기다려 주세요.                                                           ┃
+                                                                                                               ┃
+ ~/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace [⎇ demo]                  Session: 0 AIC used 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ ● Working - plan esc interrupt                                                                            Auto 

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
-import { makeSlides } from "./content.mjs";
+import { makeSlides } from "./copilot-content.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const skill = process.env.PRESENTATION_SKILL_DIR ?? "/Users/junwoojeong/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.11814/skills/presentations";
@@ -13,7 +13,8 @@ const output = join(root, ".build", "approved");
 await fs.mkdir(build, { recursive: true });
 await fs.mkdir(output, { recursive: true });
 await fs.mkdir(join(root, "delivery"), { recursive: true });
-const evidence = resolve(process.env.DEMO_EVIDENCE_DIR ?? join(root, "demo/fallback"));
+const evidence = resolve(process.env.DEMO_EVIDENCE_DIR ?? join(root, "demo/copilot-evidence"));
+const screens = resolve(process.env.DEMO_SCREENS_DIR ?? join(root, ".build/copilot/screens"));
 const verification = JSON.parse(await fs.readFile(join(evidence, "03-verification.json"), "utf8"));
 const manifest = JSON.parse(await fs.readFile(resolve(process.env.DEMO_MANIFEST_PATH ?? join(evidence, "manifest.json")), "utf8"));
 const slides = makeSlides(verification, manifest);
@@ -49,7 +50,7 @@ function connector(e, id) {
   return `<p:cxnSp><p:nvCxnSpPr><p:cNvPr id="${id}" name="Handoff ${id}"/><p:cNvCxnSpPr/><p:nvPr/></p:nvCxnSpPr><p:spPr>${xfrm(e)}<a:prstGeom prst="line"><a:avLst/></a:prstGeom><a:ln w="19050"><a:solidFill><a:srgbClr val="${e.color}"/></a:solidFill>${e.arrow ? '<a:tailEnd type="triangle" w="sm" len="sm"/>' : ""}</a:ln></p:spPr></p:cxnSp>`;
 }
 function nativeTable(e, id) {
-  return `<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="${id}" name="Concept comparison"/><p:cNvGraphicFramePr/><p:nvPr/></p:nvGraphicFramePr><p:xfrm><a:off x="${emu(e.x)}" y="${emu(e.y)}"/><a:ext cx="${emu(e.w)}" cy="${emu(e.h)}"/></p:xfrm><a:graphic><a:graphicData uri="${A}/table"><a:tbl><a:tblPr firstRow="1" bandRow="0"/><a:tblGrid>${e.widths.map((w) => `<a:gridCol w="${emu(w)}"/>`).join("")}</a:tblGrid>${e.rows.map((row, i) => `<a:tr h="${emu(e.h / e.rows.length)}">${row.map((cell) => `<a:tc><a:txBody><a:bodyPr wrap="square"/><a:lstStyle/>${paragraphs(cell, i ? 24 : 25, i ? "172033" : "FFFFFF", !i)}</a:txBody><a:tcPr marL="190500" marR="152400" marT="152400" marB="95250" anchor="ctr"><a:solidFill><a:srgbClr val="${i ? (i % 2 ? "FFFFFF" : "EEEAF7") : "584185"}"/></a:solidFill></a:tcPr></a:tc>`).join("")}</a:tr>`).join("")}</a:tbl></a:graphicData></a:graphic></p:graphicFrame>`;
+  return `<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="${id}" name="Concept comparison"/><p:cNvGraphicFramePr/><p:nvPr/></p:nvGraphicFramePr><p:xfrm><a:off x="${emu(e.x)}" y="${emu(e.y)}"/><a:ext cx="${emu(e.w)}" cy="${emu(e.h)}"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr firstRow="1" bandRow="0"/><a:tblGrid>${e.widths.map((w) => `<a:gridCol w="${emu(w)}"/>`).join("")}</a:tblGrid>${e.rows.map((row, i) => `<a:tr h="${emu(e.h / e.rows.length)}">${row.map((cell) => `<a:tc><a:txBody><a:bodyPr wrap="square"/><a:lstStyle/>${paragraphs(cell, i ? 24 : 25, i ? "172033" : "FFFFFF", !i)}</a:txBody><a:tcPr marL="190500" marR="152400" marT="152400" marB="95250" anchor="ctr"><a:solidFill><a:srgbClr val="${i ? (i % 2 ? "FFFFFF" : "EEEAF7") : "584185"}"/></a:solidFill></a:tcPr></a:tc>`).join("")}</a:tr>`).join("")}</a:tbl></a:graphicData></a:graphic></p:graphicFrame>`;
 }
 const imageData = new Map();
 let imageNumber = 0;
@@ -62,7 +63,7 @@ for (const [index, slide] of slides.entries()) {
     else if (e.kind === "line") { if (e.w > 0) objects.push(connector(e, id)); }
     else if (e.kind === "table") objects.push(nativeTable(e, id));
     else if (e.kind === "image") {
-      const data = await fs.readFile(join(root, ".build/screens", e.file));
+      const data = await fs.readFile(join(screens, e.file));
       if (data.toString("ascii", 1, 4) !== "PNG") throw new Error(`Expected PNG evidence: ${e.file}`);
       imageData.set(e.file, `data:image/png;base64,${data.toString("base64")}`);
       const width = data.readUInt32BE(16), height = data.readUInt32BE(20);
@@ -111,11 +112,12 @@ const result = await finalizePresentation({
   pythonExecutable: "/opt/homebrew/bin/python3",
   integrityValidatorPath: join(skill, "container_tools/inspect_presentation_package_integrity.py"),
   layoutValidatorPath: join(skill, "container_tools/inspect_presentation_layout_geometry.py"),
-  explicitTotalSlideCount: slides.length, requiredNativeTableOwnerSlides: [13], requiredNativeChartOwnerSlides: [],
-  layoutArgs: ["--expected-slide-size-emu", `${emu(1280)},${emu(720)}`, "--validate-heading-fit", "--validate-bullet-geometry", "--require-native-table-slide", "13"],
+  explicitTotalSlideCount: slides.length, requiredNativeTableOwnerSlides: [11], requiredNativeChartOwnerSlides: [],
+  layoutArgs: ["--expected-slide-size-emu", `${emu(1280)},${emu(720)}`, "--validate-heading-fit", "--validate-bullet-geometry", "--require-native-table-slide", "11"],
   fontPolicy: { basis: "design", families: [font] }, verifyArtifactToolImport: false,
   receiptPath: join(build, "validation.json"),
 });
+await fs.copyFile(join(output, `copilot-cxo-${revision}.pptx`), join(root, "delivery/github-copilot-cxo-agent-workflow.pptx"));
 
 function htmlElement(e) {
   const style = `left:${e.x}px;top:${e.y}px;width:${e.w}px;height:${e.h}px;`;

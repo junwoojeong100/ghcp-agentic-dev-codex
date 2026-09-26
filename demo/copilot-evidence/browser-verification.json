@@ -1,0 +1,182 @@
+{
+  "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250",
+  "syntheticData": true,
+  "results": [
+    {
+      "name": "after-request",
+      "original": "/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.build/copilot/video/raw/page@104456c39f0bd7182013c10458b3e8c2.webm"
+    },
+    {
+      "name": "after-block",
+      "original": "/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.build/copilot/video/raw/page@8eee7f0d012d5d96c6733158cdaabc99.webm"
+    },
+    {
+      "name": "after-approve",
+      "original": "/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.build/copilot/video/raw/page@ffeb2d51eedb63ea172e61421c5b791a.webm"
+    },
+    {
+      "name": "after-small",
+      "original": "/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.build/copilot/video/raw/page@8f398330ae2c15568ba3c422ff2dc4ce.webm"
+    },
+    {
+      "browserChecks": {
+        "completed": 2,
+        "rejected": 1,
+        "pending": 0,
+        "auditEvents": 6,
+        "selfApprovalBlocked": true,
+        "approvalAndRejection": true,
+        "lowValuePreserved": true
+      },
+      "state": {
+        "policy": {
+          "threshold": 1000000,
+          "currency": "KRW",
+          "version": "refund-policy-v1",
+          "enforced": true
+        },
+        "actors": [
+          {
+            "id": "cs-kim",
+            "name": "김지원",
+            "role": "support",
+            "label": "김지원 · CS 담당자"
+          },
+          {
+            "id": "cs-lee",
+            "name": "이다은",
+            "role": "support",
+            "label": "이다은 · CS 담당자"
+          },
+          {
+            "id": "ops-park",
+            "name": "박민서",
+            "role": "approver",
+            "label": "박민서 · 운영 승인자"
+          }
+        ],
+        "refunds": [
+          {
+            "id": "RF-2401",
+            "customer": "오로라 리테일",
+            "order": "ORD-8021",
+            "amount": 1200000,
+            "reason": "대량 주문 취소",
+            "status": "completed",
+            "requestedBy": "cs-kim",
+            "decidedBy": "ops-park",
+            "updatedAt": "2026-09-26T03:19:05.669Z"
+          },
+          {
+            "id": "RF-2402",
+            "customer": "블루버드 스토어",
+            "order": "ORD-8022",
+            "amount": 35000,
+            "reason": "배송비 중복 청구",
+            "status": "completed",
+            "requestedBy": "cs-kim",
+            "decidedBy": "cs-kim",
+            "updatedAt": "2026-09-26T03:19:09.009Z"
+          },
+          {
+            "id": "RF-2403",
+            "customer": "메이플 컴퍼니",
+            "order": "ORD-8023",
+            "amount": 1000000,
+            "reason": "계약 옵션 변경",
+            "status": "rejected",
+            "requestedBy": "cs-kim",
+            "decidedBy": "ops-park",
+            "updatedAt": "2026-09-26T03:19:13.341Z",
+            "decisionReason": "계약 조건 확인 필요"
+          },
+          {
+            "id": "RF-2404",
+            "customer": "스튜디오 루프",
+            "order": "ORD-8024",
+            "amount": 240000,
+            "reason": "일부 상품 반품",
+            "status": "requested",
+            "requestedBy": null,
+            "decidedBy": null
+          }
+        ],
+        "events": [
+          {
+            "id": 1,
+            "timestamp": "2026-09-26T03:18:59.177Z",
+            "refundId": "RF-2401",
+            "actorId": "cs-kim",
+            "action": "process",
+            "outcome": "allowed",
+            "amount": 1200000,
+            "reason": "고액 환불 승인 요청"
+          },
+          {
+            "id": 2,
+            "timestamp": "2026-09-26T03:19:02.368Z",
+            "refundId": "RF-2401",
+            "actorId": "cs-kim",
+            "action": "approve",
+            "outcome": "blocked",
+            "amount": 1200000,
+            "reason": "요청자 본인의 승인 및 반려는 허용되지 않음"
+          },
+          {
+            "id": 3,
+            "timestamp": "2026-09-26T03:19:05.669Z",
+            "refundId": "RF-2401",
+            "actorId": "ops-park",
+            "action": "approve",
+            "outcome": "allowed",
+            "amount": 1200000,
+            "reason": "승인 요청 검토 후 승인"
+          },
+          {
+            "id": 4,
+            "timestamp": "2026-09-26T03:19:09.009Z",
+            "refundId": "RF-2402",
+            "actorId": "cs-kim",
+            "action": "process",
+            "outcome": "allowed",
+            "amount": 35000,
+            "reason": "소액 환불 즉시 처리"
+          },
+          {
+            "id": 5,
+            "timestamp": "2026-09-26T03:19:12.323Z",
+            "refundId": "RF-2403",
+            "actorId": "cs-kim",
+            "action": "process",
+            "outcome": "allowed",
+            "amount": 1000000,
+            "reason": "고액 환불 승인 요청"
+          },
+          {
+            "id": 6,
+            "timestamp": "2026-09-26T03:19:13.341Z",
+            "refundId": "RF-2403",
+            "actorId": "ops-park",
+            "action": "reject",
+            "outcome": "allowed",
+            "amount": 1000000,
+            "reason": "계약 조건 확인 필요"
+          }
+        ],
+        "summary": {
+          "totalCount": 4,
+          "totalAmount": 2475000,
+          "pendingApprovalCount": 0,
+          "pendingApprovalAmount": 0,
+          "completedCount": 2,
+          "rejectedCount": 1
+        },
+        "demoMode": "local-app"
+      }
+    },
+    {
+      "name": "after-reject",
+      "original": "/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.build/copilot/video/raw/page@773cb4d989d16a45dc143b55aba53cbf.webm"
+    }
+  ]
+}

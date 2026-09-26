@@ -1,0 +1,434 @@
+diff --git a/README.md b/README.md
+index 5584543..51e40b1 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+ # Refund Control Desk
+ 
+-가상 기업의 환불 운영 앱이다. 120만 원 환불을 승인 없이 처리할 수 있는 현재 상태에서 시작한다.
++가상 기업의 환불 운영 앱이다. 100만 원 이상 환불은 CS 담당자가 요청하고 다른 운영 승인자가 결정하며, 100만 원 미만은 기존처럼 즉시 처리한다.
+ 실제 고객 정보, 결제 서비스, 계좌, 인증 공급자에 연결하지 않는다. 모든 처리는 메모리 안에서만 실행한다.
+ 
+ ## 실행
+@@ -14,15 +14,16 @@ npm start
+ 
+ `http://127.0.0.1:4173`에서 연다. `PORT=4174 npm start`로 포트를 바꿀 수 있다.
+ 
+-## 현재 동작
++## 환불 통제 동작
+ 
+-`GET /api/refunds`는 합성 환불 4건, 시연용 역할, 현재 처리 현황을 반환한다.
+-`POST /api/refunds/:id/process`에 `{ "actorId": "cs-kim" }`을 보내면 금액과 무관하게 모의 처리를 완료한다.
+-`POST /api/demo/reset`은 메모리 상태를 초기화한다. 중복 처리와 클라이언트의 금액 변경은 거부한다.
+-승인 및 반려 워크플로와 감사 이벤트는 아직 구현하지 않았다.
++`GET /api/refunds`는 합성 환불, 시연용 역할, 정책, 처리 요약과 메모리 내 감사 이벤트를 반환한다.
++`POST /api/refunds/:id/process`에 `{ "actorId": "cs-kim" }`을 보내면 1,000,000원 미만은 모의 완료하고, 이상은 `pending_approval`로 전환해 HTTP 202를 반환한다.
++대기 건은 요청자가 아닌 `approver`만 `approve` 또는 유효한 반려 이유와 함께 `reject`할 수 있다. 중복·종료 상태 작업, 자기 승인 및 역할 위반은 명확한 오류로 거부하고 식별된 actor의 유효한 업무 시도는 감사 이벤트로 남긴다.
++`POST /api/demo/reset`은 환불, 감사 이벤트와 이벤트 순번을 초기화한다. 서비스 인스턴스의 상태는 서로 격리된다.
+ 
+ ## 반드시 구분할 경계
+ 
+-역할 선택은 실제 사용자 인증이 아니다. 추가할 감사 이력도 이 데모에서는 메모리에만 저장한다.
++역할 선택은 실제 사용자 인증이 아니다. 감사 이력은 이 데모에서 메모리에만 저장되며 재시작하면 사라진다.
++승인 대기 금액은 현재 상태의 합계이지 절감액이나 예방 성과가 아니다. 승인 완료도 실제 금전 이동을 수행하지 않는다.
+ 이 앱은 Copilot 제품 UI가 아니다. 개발 역할의 검토는 GitHub Copilot code review 제품의 시연과 다르다.
+ GitHub PR, GitHub Actions, 병합, 배포, Copilot Studio, A2A 프로토콜 연결을 실행하지 않는다.
+diff --git a/public/app.mjs b/public/app.mjs
+index 9e94283..2eb9cd0 100644
+--- a/public/app.mjs
++++ b/public/app.mjs
+@@ -1,5 +1,6 @@
+ const money = (amount) => new Intl.NumberFormat("ko-KR").format(amount) + "원";
+ const statuses = { requested: "처리 전", pending_approval: "승인 대기", completed: "처리 완료", rejected: "반려" };
++const actionLabels = { process: "승인 요청", approve: "승인", reject: "반려" };
+ const actorSelect = document.querySelector("#actor");
+ const notice = document.querySelector("#notice");
+ let busy = false;
+@@ -20,13 +21,13 @@ async function request(path, body) {
+   return { result, status: response.status };
+ }
+ 
+-async function act(id, action) {
++async function act(id, action, extra = {}) {
+   if (busy) return;
+   busy = true;
+   notice.className = "";
+   notice.textContent = "서버에서 처리 중입니다.";
+   try {
+-    const { result, status } = await request(`/api/refunds/${id}/${action}`, { actorId: actorSelect.value });
++    const { result, status } = await request(`/api/refunds/${id}/${action}`, { actorId: actorSelect.value, ...extra });
+     notice.className = "good";
+     notice.textContent = `HTTP ${status} · ${result.message}`;
+   } catch (error) {
+@@ -46,11 +47,24 @@ async function refresh() {
+     }
+     document.querySelector("#total-count").textContent = `${data.summary.totalCount}건`;
+     document.querySelector("#pending-amount").textContent = money(data.summary.pendingApprovalAmount);
++    document.querySelector("#pending-count").textContent = `${data.summary.pendingApprovalCount}건 승인 대기 · 성과 절감액 아님`;
+     document.querySelector("#completed-count").textContent = `${data.summary.completedCount}건`;
+     document.querySelector("#event-count").textContent = `${data.events.length}건`;
+     document.querySelector("#run-mode").textContent = data.demoMode === "recorded-replay" ? "사전 녹화 실행 결과 재생 · 합성 데이터" : "로컬 시연용 앱 · 합성 데이터";
++    const banner = document.querySelector("#policy-banner");
++    banner.className = `policy-banner ${data.policy.enforced ? "success" : "warning"}`;
++    banner.querySelector(".policy-label").textContent = data.policy.enforced ? "POLICY ENFORCED" : "POLICY NOT ENFORCED";
++    banner.querySelector("h2").textContent = data.policy.enforced ? "100만 원 이상은 승인 후 처리됩니다" : "고액 환불 정책이 적용되지 않습니다";
++    document.querySelector("#policy-description").textContent = data.policy.enforced
++      ? "CS 담당자가 요청하고, 다른 운영 승인자가 승인 또는 반려합니다. 100만 원 미만은 기존처럼 즉시 처리됩니다."
++      : "현재 정책 상태를 확인할 수 없습니다.";
++    banner.querySelector(".policy-amount").replaceChildren(
++      document.createTextNode("승인 대기 "),
++      text("strong", `${data.summary.pendingApprovalCount}건 · ${money(data.summary.pendingApprovalAmount)}`),
++    );
+     const rows = document.querySelector("#refund-rows");
+     rows.replaceChildren();
++    const selectedActor = data.actors.find((actor) => actor.id === actorSelect.value);
+     for (const refund of data.refunds) {
+       const row = document.createElement("tr");
+       row.dataset.id = refund.id;
+@@ -60,14 +74,64 @@ async function refresh() {
+       status.append(text("span", statuses[refund.status], `badge ${refund.status}`));
+       const actions = text("td", "", "actions");
+       if (refund.status === "requested") {
+-        const button = text("button", "환불 처리");
+-        button.setAttribute("aria-label", `${refund.id} 환불 처리`);
+-        button.addEventListener("click", () => act(refund.id, "process"));
+-        actions.append(button);
++        if (selectedActor?.role === "support") {
++          const button = text("button", refund.amount >= data.policy.threshold ? "승인 요청" : "환불 처리");
++          button.setAttribute("aria-label", `${refund.id} ${refund.amount >= data.policy.threshold ? "승인 요청" : "환불 처리"}`);
++          button.addEventListener("click", () => act(refund.id, "process"));
++          actions.append(button);
++        } else actions.append(text("span", "CS 담당자만 요청 가능", "subtle"));
++      } else if (refund.status === "pending_approval") {
++        if (selectedActor?.id === refund.requestedBy) {
++          const button = text("button", "자기 승인 차단 확인");
++          button.className = "test-action";
++          button.setAttribute("aria-label", `${refund.id} 자기 승인 차단 확인`);
++          button.addEventListener("click", () => act(refund.id, "approve"));
++          actions.append(button);
++        }
++        if (selectedActor?.role === "approver") {
++          const approve = text("button", "승인");
++          approve.setAttribute("aria-label", `${refund.id} 승인`);
++          approve.addEventListener("click", () => act(refund.id, "approve"));
++          const rejectLabel = text("label", `${refund.id} 반려 이유`);
++          rejectLabel.className = "reject-label";
++          rejectLabel.htmlFor = `reject-reason-${refund.id}`;
++          const reason = document.createElement("input");
++          reason.id = `reject-reason-${refund.id}`;
++          reason.type = "text";
++          reason.maxLength = 200;
++          reason.setAttribute("aria-label", `${refund.id} 반려 이유`);
++          const reject = text("button", "반려");
++          reject.className = "danger";
++          reject.setAttribute("aria-label", `${refund.id} 반려`);
++          reject.addEventListener("click", () => act(refund.id, "reject", { reason: reason.value }));
++          actions.append(approve, rejectLabel, reason, reject);
++        }
+       } else actions.append(text("span", "처리 종료", "subtle"));
+       row.append(customer, text("td", money(refund.amount), "amount"), text("td", refund.reason), status, actions);
+       rows.append(row);
+     }
++    const actorNames = new Map(data.actors.map((actor) => [actor.id, actor.name]));
++    const timeline = document.querySelector("#audit-events");
++    timeline.replaceChildren();
++    if (!data.events.length) {
++      timeline.className = "audit-empty";
++      timeline.textContent = "아직 감사 이벤트가 없습니다.";
++    } else {
++      timeline.className = "audit-list";
++      for (const event of [...data.events].reverse()) {
++        const entry = document.createElement("article");
++        entry.className = `event ${event.outcome}`;
++        const timestamp = text("time", event.timestamp, "event-time");
++        const details = document.createElement("span");
++        details.className = "event-text";
++        details.append(
++          text("strong", `${event.refundId} · ${actorNames.get(event.actorId) ?? event.actorId}`),
++          document.createTextNode(` · ${actionLabels[event.action]} ${event.outcome === "allowed" ? "성공" : "차단"} · ${money(event.amount)} · ${event.reason}`),
++        );
++        entry.append(timestamp, details);
++        timeline.append(entry);
++      }
++    }
+   } catch (error) {
+     notice.className = "error";
+     notice.textContent = `데이터 조회 실패: ${error.message}`;
+@@ -77,12 +141,12 @@ async function refresh() {
+ document.querySelector("#reset").addEventListener("click", async () => {
+   if (busy) return;
+   try {
+-    await request("/api/demo/reset", {});
++    const { status } = await request("/api/demo/reset", {});
+     notice.className = "";
+-    notice.textContent = "합성 데이터를 초기화했습니다. 실제 환불은 실행되지 않습니다.";
++    notice.textContent = `HTTP ${status} · 합성 데이터를 초기화했습니다. 실제 환불은 실행되지 않습니다.`;
+     await refresh();
+   } catch (error) { notice.className = "error"; notice.textContent = error.message; }
+ });
+ actorSelect.addEventListener("change", refresh);
+ await refresh();
+-if (!notice.classList.contains("error")) notice.textContent = "RF-2401: 120만 원도 현재는 승인 없이 즉시 처리할 수 있습니다.";
++if (!notice.classList.contains("error")) notice.textContent = "100만 원 이상은 승인 요청 후 다른 운영 승인자가 결정합니다. 모든 처리는 시연용 모의 동작입니다.";
+diff --git a/public/index.html b/public/index.html
+index fc268b3..8ebfe82 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -27,7 +27,7 @@
+     </section>
+     <section class="metrics" aria-label="현재 처리 현황">
+       <div><span>전체 환불 요청</span><strong id="total-count">-</strong><small>합성 데이터</small></div>
+-      <div><span>승인 대기 금액</span><strong id="pending-amount">-</strong><small id="pending-count">승인 워크플로 없음</small></div>
++      <div><span>승인 대기 금액</span><strong id="pending-amount">-</strong><small id="pending-count">-</small></div>
+       <div><span>처리 완료</span><strong id="completed-count">-</strong><small>실제 금전 이동 없음</small></div>
+       <div><span>감사 이벤트</span><strong id="event-count">-</strong><small>메모리 내 시연용 기록</small></div>
+     </section>
+@@ -38,7 +38,7 @@
+     </section>
+     <section class="audit-section" aria-label="감사 기록">
+       <div class="section-heading"><div><h2>감사 타임라인</h2><p>누가, 언제, 어떤 결정을 했는지 확인하는 화면입니다.</p></div><span class="subtle">서버 재시작 시 초기화</span></div>
+-      <div id="audit-events" class="audit-empty">현재 버전에는 승인 이력과 차단 시도 기록이 없습니다.</div>
++      <div id="audit-events" class="audit-empty">감사 이벤트를 불러오는 중입니다.</div>
+     </section>
+     <footer><span id="run-mode">로컬 합성 데이터</span><span>결제 연동 없음 · 운영용 인증 및 영구 감사 저장소 없음</span></footer>
+   </main>
+diff --git a/public/styles.css b/public/styles.css
+index 220d010..881c3ee 100644
+--- a/public/styles.css
++++ b/public/styles.css
+@@ -55,6 +55,8 @@ td strong { display: block; margin-bottom: 6px; font-size: 13px; }
+ td small { color: #9ba4b6; font-size: 10px; }
+ td.amount { font-size: 16px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+ td.actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-width: 125px; }
++td.actions input { min-width: 120px; width: 100%; padding: 8px; border: 1px solid #d6dce6; border-radius: 6px; font-size: 11px; }
++.reject-label { width: 100%; font-size: 10px; color: #758093; }
+ tr[data-id="RF-2401"] { background: #faf8ff; }
+ .badge { display: inline-block; border-radius: 4px; padding: 6px 8px; font-size: 10px; color: #6a768b; background: #eff2f8; white-space: nowrap; }
+ .badge.pending_approval { background: #fff0d8; color: #98641c; }
+@@ -67,6 +69,7 @@ tr[data-id="RF-2401"] { background: #faf8ff; }
+ .event-time { font-size: 10px; color: #8b94a6; width: 75px; flex-shrink: 0; }
+ .event-text { flex: 1; line-height: 1.65; }
+ .event-text strong { color: #364052; }
++.audit-list { display: grid; gap: 8px; }
+ footer { margin-top: 27px; display: flex; justify-content: space-between; font-size: 10px; gap: 20px; color: #96a0b3; }
+ @media (max-width: 1100px) { .sidebar { width: 170px; padding: 25px 18px; } main { margin-left: 170px; width: calc(100% - 170px); padding: 26px; } .sidebar-note { left: 18px; } .metrics > div { padding: 0 12px; } .metrics strong { font-size: 20px; } th, td { padding: 14px 10px; } }
+ @media (max-width: 760px) { .sidebar { display: none; } main { width: 100%; margin: 0; padding: 20px; } header { flex-wrap: wrap; } .metrics { grid-template-columns: repeat(2, 1fr); gap: 18px; } .policy-amount { display: none; } }
+diff --git a/src/refunds.mjs b/src/refunds.mjs
+index eebd50f..ae34105 100644
+--- a/src/refunds.mjs
++++ b/src/refunds.mjs
+@@ -3,22 +3,40 @@ import { actors, initialRefunds, threshold } from "./fixtures.mjs";
+ const failure = (status, code, message) => ({ status, body: { error: { code, message } } });
+ 
+ export function createRefundService({ seed = initialRefunds, clock = () => new Date().toISOString() } = {}) {
+-  let refunds = structuredClone(seed);
++  const initialState = structuredClone(seed);
++  let refunds = structuredClone(initialState);
++  let events = [];
++  let nextEventId = 1;
+ 
+   function state() {
++    const pending = refunds.filter((item) => item.status === "pending_approval");
+     return {
+-      policy: { threshold, currency: "KRW", version: "refund-policy-v1", enforced: false },
+-      actors: structuredClone(actors), refunds: structuredClone(refunds), events: [],
++      policy: { threshold, currency: "KRW", version: "refund-policy-v1", enforced: true },
++      actors: structuredClone(actors), refunds: structuredClone(refunds), events: structuredClone(events),
+       summary: {
+         totalCount: refunds.length,
+         totalAmount: refunds.reduce((sum, item) => sum + item.amount, 0),
+-        pendingApprovalCount: 0, pendingApprovalAmount: 0,
++        pendingApprovalCount: pending.length,
++        pendingApprovalAmount: pending.reduce((sum, item) => sum + item.amount, 0),
+         completedCount: refunds.filter((item) => item.status === "completed").length,
+-        rejectedCount: 0,
++        rejectedCount: refunds.filter((item) => item.status === "rejected").length,
+       },
+     };
+   }
+ 
++  function record(refund, actor, action, outcome, reason) {
++    events.push({
++      id: nextEventId++,
++      timestamp: clock(),
++      refundId: refund.id,
++      actorId: actor.id,
++      action,
++      outcome,
++      amount: refund.amount,
++      reason,
++    });
++  }
++
+   function handle(method, requestUrl, body = {}) {
+     const url = new URL(requestUrl, "http://127.0.0.1");
+     if (url.pathname === "/api/refunds") {
+@@ -26,26 +44,78 @@ export function createRefundService({ seed = initialRefunds, clock = () => new D
+     }
+     if (url.pathname === "/api/demo/reset") {
+       if (method !== "POST") return failure(405, "METHOD_NOT_ALLOWED", "POST만 지원합니다.");
+-      refunds = structuredClone(seed);
++      refunds = structuredClone(initialState);
++      events = [];
++      nextEventId = 1;
+       return { status: 200, body: state() };
+     }
+     const match = url.pathname.match(/^\/api\/refunds\/(RF-\d+)\/(process|approve|reject)$/);
+     if (!match) return failure(404, "NOT_FOUND", "요청한 경로가 없습니다.");
+     if (method !== "POST") return failure(405, "METHOD_NOT_ALLOWED", "POST만 지원합니다.");
+-    if (!body || typeof body !== "object" || Array.isArray(body) || Object.keys(body).some((key) => !["actorId", "reason"].includes(key))) {
+-      return failure(400, "INVALID_REQUEST", "actorId와 reason만 지정할 수 있습니다.");
+-    }
++
++    const action = match[2];
++    const validBody = body && typeof body === "object" && !Array.isArray(body);
++    if (!validBody) return failure(400, "INVALID_REQUEST", "actorId와 reason만 지정할 수 있습니다.");
+     const actor = actors.find((item) => item.id === body.actorId);
+     if (!actor) return failure(401, "UNKNOWN_ACTOR", "시연용 역할을 선택해 주세요.");
+     const refund = refunds.find((item) => item.id === match[1]);
+     if (!refund) return failure(404, "REFUND_NOT_FOUND", "환불 건이 없습니다.");
+-    if (match[2] !== "process") return failure(409, "CONTROL_NOT_IMPLEMENTED", "승인 워크플로가 아직 없습니다.");
+-    if (refund.status !== "requested") return failure(409, "INVALID_STATE", "이미 처리한 요청입니다.");
+-    refund.status = "completed";
+-    refund.requestedBy = actor.id;
++
++    const unsupportedField = Object.keys(body).some((key) => !["actorId", "reason"].includes(key));
++    if (unsupportedField) {
++      record(refund, actor, action, "blocked", "허용되지 않은 요청 필드 또는 환불 금액 변경 시도");
++      return failure(400, "INVALID_REQUEST", "actorId와 reason만 지정할 수 있습니다.");
++    }
++
++    if ((action === "process" && refund.status !== "requested")
++      || (action !== "process" && refund.status !== "pending_approval")) {
++      record(refund, actor, action, "blocked", "현재 환불 상태에서는 해당 작업을 수행할 수 없음");
++      return failure(409, "INVALID_STATE", "현재 환불 상태에서는 해당 작업을 수행할 수 없습니다.");
++    }
++
++    if (action === "process") {
++      if (actor.role !== "support") {
++        record(refund, actor, action, "blocked", "환불 요청은 CS 담당자만 시작할 수 있음");
++        return failure(403, "REQUESTER_REQUIRED", "환불 요청은 CS 담당자만 시작할 수 있습니다.");
++      }
++      refund.requestedBy = actor.id;
++      refund.updatedAt = clock();
++      if (refund.amount >= threshold) {
++        refund.status = "pending_approval";
++        record(refund, actor, action, "allowed", "고액 환불 승인 요청");
++        return { status: 202, body: { refund: structuredClone(refund), message: "승인 요청을 등록했습니다." } };
++      }
++      refund.status = "completed";
++      refund.decidedBy = actor.id;
++      record(refund, actor, action, "allowed", "소액 환불 즉시 처리");
++      return { status: 200, body: { refund: structuredClone(refund), message: "환불 처리 완료 (모의 처리)" } };
++    }
++
++    if (actor.id === refund.requestedBy) {
++      record(refund, actor, action, "blocked", "요청자 본인의 승인 및 반려는 허용되지 않음");
++      return failure(403, "SELF_APPROVAL", "요청자와 다른 운영 승인자만 결정할 수 있습니다.");
++    }
++    if (actor.role !== "approver") {
++      record(refund, actor, action, "blocked", "승인 및 반려는 운영 승인자만 할 수 있음");
++      return failure(403, "APPROVER_REQUIRED", "운영 승인자만 결정할 수 있습니다.");
++    }
++    if (action === "reject" && (typeof body.reason !== "string" || !body.reason.trim() || body.reason.trim().length > 200)) {
++      record(refund, actor, action, "blocked", "반려 이유가 없거나 1~200자 범위를 벗어남");
++      return failure(400, "INVALID_REASON", "반려 이유는 공백을 제외하고 1~200자로 입력해 주세요.");
++    }
++
++    refund.status = action === "approve" ? "completed" : "rejected";
+     refund.decidedBy = actor.id;
++    if (action === "reject") refund.decisionReason = body.reason.trim();
+     refund.updatedAt = clock();
+-    return { status: 200, body: { refund: structuredClone(refund), message: "환불 처리 완료 (모의 처리)" } };
++    record(refund, actor, action, "allowed", action === "reject" ? body.reason.trim() : "승인 요청 검토 후 승인");
++    return {
++      status: 200,
++      body: {
++        refund: structuredClone(refund),
++        message: action === "approve" ? "환불을 승인했습니다 (모의 처리)" : "환불 요청을 반려했습니다.",
++      },
++    };
+   }
+ 
+   return { handle };
+diff --git a/test/refunds.test.mjs b/test/refunds.test.mjs
+index 8d88e08..f018b28 100644
+--- a/test/refunds.test.mjs
++++ b/test/refunds.test.mjs
+@@ -49,3 +49,76 @@ test("demo reset and separate service instances isolate state", () => {
+   service.handle("POST", "/api/demo/reset", {});
+   assert.equal(service.handle("GET", "/api/refunds").body.summary.completedCount, 0);
+ });
++
++test("the threshold is enforced and high-value requests wait for another approver", () => {
++  const service = createRefundService();
++  const requested = service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim" });
++  assert.equal(service.handle("GET", "/api/refunds").body.policy.enforced, true);
++  assert.equal(requested.status, 202);
++  assert.equal(requested.body.refund.status, "pending_approval");
++  assert.equal(requested.body.refund.requestedBy, "cs-kim");
++  assert.equal(requested.body.refund.decidedBy, null);
++  assert.equal(service.handle("GET", "/api/refunds").body.summary.pendingApprovalAmount, 1_200_000);
++
++  const approved = service.handle("POST", "/api/refunds/RF-2401/approve", { actorId: "ops-park" });
++  assert.equal(approved.status, 200);
++  assert.equal(approved.body.refund.status, "completed");
++  assert.equal(approved.body.refund.requestedBy, "cs-kim");
++  assert.equal(approved.body.refund.decidedBy, "ops-park");
++});
++
++test("the exact threshold needs approval while amounts below it still complete immediately", () => {
++  const seed = createRefundService().handle("GET", "/api/refunds").body.refunds;
++  seed[2].amount = 999_999;
++  const belowThreshold = createRefundService({ seed });
++  assert.equal(belowThreshold.handle("POST", "/api/refunds/RF-2403/process", { actorId: "cs-kim" }).status, 200);
++  seed[2].amount = 1_000_000;
++  const atThreshold = createRefundService({ seed });
++  assert.equal(atThreshold.handle("POST", "/api/refunds/RF-2403/process", { actorId: "cs-kim" }).status, 202);
++});
++
++test("requester role, self-approval, and approver role failures are audited", () => {
++  const service = createRefundService();
++  assert.equal(service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "ops-park" }).body.error.code, "REQUESTER_REQUIRED");
++  assert.equal(service.handle("GET", "/api/refunds").body.events.at(-1).outcome, "blocked");
++  service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim" });
++  assert.equal(service.handle("POST", "/api/refunds/RF-2401/approve", { actorId: "cs-kim" }).body.error.code, "SELF_APPROVAL");
++  assert.equal(service.handle("POST", "/api/refunds/RF-2401/reject", { actorId: "cs-lee", reason: "확인 필요" }).body.error.code, "APPROVER_REQUIRED");
++  const events = service.handle("GET", "/api/refunds").body.events;
++  assert.deepEqual(events.map(({ action, outcome }) => [action, outcome]), [
++    ["process", "blocked"], ["process", "allowed"], ["approve", "blocked"], ["reject", "blocked"],
++  ]);
++  assert.ok(events.every((event) => event.reason.trim().length > 0));
++});
++
++test("approval and rejection are terminal, and rejection requires a meaningful reason", () => {
++  const service = createRefundService();
++  service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim" });
++  for (const reason of [undefined, "", "   ", "x".repeat(201), 123]) {
++    const response = service.handle("POST", "/api/refunds/RF-2401/reject", { actorId: "ops-park", reason });
++    assert.equal(response.status, 400);
++    assert.equal(response.body.error.code, "INVALID_REASON");
++  }
++  const rejected = service.handle("POST", "/api/refunds/RF-2401/reject", { actorId: "ops-park", reason: "계약 조건 확인 필요" });
++  assert.equal(rejected.status, 200);
++  assert.equal(rejected.body.refund.status, "rejected");
++  assert.equal(service.handle("GET", "/api/refunds").body.summary.rejectedCount, 1);
++  assert.equal(service.handle("POST", "/api/refunds/RF-2401/approve", { actorId: "ops-park" }).body.error.code, "INVALID_STATE");
++  assert.equal(service.handle("GET", "/api/refunds").body.events.at(-1).outcome, "blocked");
++});
++
++test("known actors' amount tampering and unknown fields are blocked with the server amount", () => {
++  const service = createRefundService();
++  for (const extra of [{ amount: 1 }, { unsupported: true }]) {
++    const response = service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim", ...extra });
++    assert.equal(response.status, 400);
++    assert.equal(response.body.error.code, "INVALID_REQUEST");
++  }
++  const events = service.handle("GET", "/api/refunds").body.events;
++  assert.deepEqual(events.map(({ id }) => id), [1, 2]);
++  assert.ok(events.every((event) => event.outcome === "blocked" && event.amount === 1_200_000 && event.reason.trim()));
++  service.handle("POST", "/api/demo/reset", {});
++  assert.deepEqual(service.handle("GET", "/api/refunds").body.events, []);
++  assert.equal(service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim" }).status, 202);
++  assert.equal(service.handle("GET", "/api/refunds").body.events[0].id, 1);
++});

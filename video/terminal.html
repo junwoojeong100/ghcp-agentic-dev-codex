@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actual GitHub Copilot CLI recording</title>
+<link rel="stylesheet" href="/xterm.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b1020;color:#e2e8f0;font-family:Arial,sans-serif}
+header{height:76px;display:flex;align-items:center;gap:24px;padding:0 48px;border-bottom:1px solid #263248;font-size:22px}
+header strong{color:#d7c3ff;font-size:26px}header span{color:#94a3b8}#status{margin-left:auto;font-size:18px}
+#terminal{position:absolute;left:64px;top:99px;width:1792px;height:802px;overflow:hidden}
+footer{position:absolute;bottom:31px;left:64px;right:64px;line-height:1.65;font-size:20px;color:#94a3b8}
+.xterm .xterm-viewport{overflow-y:hidden!important}
+</style>
+<header><strong>GitHub Copilot</strong><span>실제 CLI 실행 · 에이전트 워크플로</span><span id="status">연결 중</span></header>
+<main id="terminal" aria-label="실제 GitHub Copilot CLI 터미널"></main>
+<footer>실제 GitHub Copilot 프로세스의 원본 터미널 출력<br>합성 데이터 · 시연용 키 입력 자동화 · 실제 사람의 출시 승인이 아님</footer>
+<script src="/xterm.js"></script>
+<script>
+const token=__TOKEN__;
+const terminal=new Terminal({cols:112,rows:28,fontFamily:'Menlo, "Nanum Gothic", monospace',fontSize:25,lineHeight:1.1,scrollback:8000,cursorBlink:true,theme:{background:'#0b1020',foreground:'#e2e8f0',cursor:'#a7efcb',selectionBackground:'#334155',black:'#0b1020',red:'#ff7b83',green:'#8ee2b3',yellow:'#fbd38d',blue:'#92b5f7',magenta:'#d4adff',cyan:'#84dde6',white:'#e2e8f0',brightBlack:'#8b98b0'}});
+terminal.open(document.getElementById('terminal'));
+const request=async(action,body={})=>{const response=await fetch('/'+action,{method:'POST',headers:{'Content-Type':'application/json','X-Demo-Token':token},body:JSON.stringify(body)});if(!response.ok)throw new Error(await response.text());return response.json()};
+let writes=Promise.resolve();
+terminal.onData(data=>request('input',{data,source:/^\u001b\[[\d;?]*[Rcn]$/.test(data)?'terminal-response':'interactive-terminal'}).catch(error=>document.getElementById('status').textContent=error.message));
+const events=new EventSource('/events?token='+encodeURIComponent(token));
+events.onmessage=event=>{const message=JSON.parse(event.data);if(message.type==='output')writes=writes.then(()=>new Promise(resolve=>terminal.write(message.data,resolve)));if(message.type==='spawn')document.getElementById('status').textContent='실제 Copilot 실행 중';if(message.type==='exit')document.getElementById('status').textContent='종료 코드 '+message.exitCode;if(message.type==='error')document.getElementById('status').textContent='ERROR: '+message.message};
+function text(history=false){const buffer=terminal.buffer.active;const start=history?0:buffer.viewportY;const end=history?buffer.length:Math.min(buffer.length,start+terminal.rows);const lines=[];for(let i=start;i<end;i++)lines.push(buffer.getLine(i)?.translateToString(true)??'');return lines.join('\n')}
+window.demo={start:()=>request('start'),input:(data)=>request('input',{data,source:'demo-automation'}),text,flush:()=>writes,terminal};
+</script>
+</html>

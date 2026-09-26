@@ -1,6 +1,7 @@
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { ROOT, replay, paths } from "./workflow.mjs";
+import { ROOT, paths } from "./workflow.mjs";
+import { replayCopilot } from "./copilot.mjs";
 
 const [mode, requestedPort] = process.argv.slice(2);
 if (!["before", "after"].includes(mode)) throw new Error("Usage: node demo/serve.mjs before|after [port]");
@@ -9,7 +10,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("Port m
 let workspace = join(ROOT, "demo/starter");
 if (mode === "after") {
   const name = `preview-${Date.now().toString(36)}`;
-  await replay(name);
+  await replayCopilot(name);
   workspace = paths(name).workspace;
   process.env.DEMO_MODE = "recorded-replay";
 } else process.env.DEMO_MODE = "baseline";

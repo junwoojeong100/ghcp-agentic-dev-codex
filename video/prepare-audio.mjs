@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 import { scenes } from "./scenes.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const build = join(root, ".build/video/audio");
+const build = join(root, ".build/copilot/video/audio");
 await fs.mkdir(build, { recursive: true });
 await fs.mkdir(join(root, "delivery"), { recursive: true });
 function run(cmd, args) {
@@ -55,7 +55,7 @@ for (const scene of scenes) {
   offset += scene.duration;
   console.log(`${scene.id}: ${Math.round(spoken*10)/10}s spoken, ${scene.duration}s scene, speed ${tempo.toFixed(3)}`);
 }
-await fs.writeFile(join(root, ".build/video/timeline.json"), JSON.stringify(timeline, null, 2));
-await fs.writeFile(join(root, "delivery/github-copilot-cxo-demo-ko.srt"), cues.map((cue,i)=>`${i+1}\n${stamp(cue.start)} --> ${stamp(cue.end)}\n${cue.text}\n`).join("\n"));
-await fs.writeFile(join(root, "delivery/video-script.md"), `# 5분 영상 대본\n\n실제 로컬 실행을 편집한 사전 녹화 영상. 한국어 음성은 macOS Yuna 합성 음성이다.\n합성 고객과 모의 역할을 사용하며 실제 결제와 운영 배포는 없다. 영상 길이는 개발 소요 시간이 아니다.\n\n${timeline.map((scene)=>`## ${stamp(scene.start).slice(0,8)} ${scene.chapter}\n\n${scene.narration}\n`).join("\n")}`);
+await fs.writeFile(join(root, ".build/copilot/video/timeline.json"), JSON.stringify(timeline, null, 2));
+await fs.writeFile(join(root, "delivery/github-copilot-cxo-demo-ko-v2.srt"), cues.map((cue,i)=>`${i+1}\n${stamp(cue.start)} --> ${stamp(cue.end)}\n${cue.text}\n`).join("\n"));
+await fs.writeFile(join(root, "delivery/video-script.md"), `# GitHub Copilot CXO 고객용 5분 영상 대본\n\n실제 GitHub Copilot CLI와 그 코드로 실행한 앱을 편집한 사전 녹화 영상. 한국어 음성은 macOS Yuna 합성 음성이다.\n합성 고객·모의 역할과 시연용 자동 입력을 사용한다. 실제 사람의 출시 승인, 실제 결제와 운영 배포는 없다. 영상 길이는 개발 시간이나 ROI가 아니다.\n\n${timeline.map((scene)=>`## ${stamp(scene.start).slice(0,8)} ${scene.chapter}\n\n${scene.narration}\n`).join("\n")}`);
 console.log(`Prepared ${timeline.length} scenes, ${offset} seconds, ${cues.length} subtitle cues.`);

@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILD = ROOT / ".build" / "video"
+BUILD = ROOT / ".build" / "copilot" / "video"
 OUT = BUILD / "captions"
 OUT.mkdir(parents=True, exist_ok=True)
 timeline = json.loads((BUILD / "timeline.json").read_text())
@@ -37,7 +37,7 @@ for scene in timeline:
     draw = ImageDraw.Draw(header)
     draw.text((36, 23), "GitHub Copilot", font=brand_font, fill="#D7C3FF")
     draw.text((330, 24), scene["chapter"], font=header_font, fill="white")
-    disclosure = "실제 로컬 실행 편집 · 합성 데이터 · 모의 승인"
+    disclosure = "실제 CLI 녹화 · 구간 편집 · 시연용 자동 입력" if scene.get("terminal") else "실제 실행 편집 · 합성 데이터"
     width = draw.textlength(disclosure, font=small_font)
     draw.text((1883-width, 28), disclosure, font=small_font, fill="#B4BDCE")
     if 330 + draw.textlength(scene["chapter"], font=header_font) > 1860 - width:

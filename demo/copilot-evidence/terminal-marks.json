@@ -1,0 +1,275 @@
+[
+  {
+    "name": "cli-ready",
+    "at": 82.465,
+    "recordedAt": "2026-09-26T02:25:58.992Z",
+    "videoAt": 83.15,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "plan-start",
+    "at": 82.809,
+    "recordedAt": "2026-09-26T02:25:59.336Z",
+    "videoAt": 83.498,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "plan-reading",
+    "at": 128.746,
+    "recordedAt": "2026-09-26T02:26:45.273Z",
+    "videoAt": 129.431,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "scope-confirmation",
+    "at": 144.358,
+    "recordedAt": "2026-09-26T02:27:00.885Z",
+    "videoAt": 145.045,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "scope-confirmed",
+    "at": 221.289,
+    "recordedAt": "2026-09-26T02:28:17.816Z",
+    "videoAt": 221.975,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "plan-ready",
+    "at": 288.934,
+    "recordedAt": "2026-09-26T02:29:25.461Z",
+    "videoAt": 289.618,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "plan-accept",
+    "at": 309.091,
+    "recordedAt": "2026-09-26T02:29:45.618Z",
+    "videoAt": 309.775,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "implementation-start",
+    "at": 309.407,
+    "recordedAt": "2026-09-26T02:29:45.934Z",
+    "videoAt": 310.092,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "plan-mode-boundary",
+    "at": 381.011,
+    "recordedAt": "2026-09-26T02:30:57.538Z",
+    "videoAt": 381.695,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "implementation-approved",
+    "at": 437.239,
+    "recordedAt": "2026-09-26T02:31:53.766Z",
+    "videoAt": 437.923,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "approval-delete-rejected",
+    "at": 515.962,
+    "recordedAt": "2026-09-26T02:33:12.489Z",
+    "videoAt": 516.646,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "user-steering",
+    "at": 628.809,
+    "recordedAt": "2026-09-26T02:35:05.336Z",
+    "videoAt": 629.495,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "approval-write",
+    "at": 735.621,
+    "recordedAt": "2026-09-26T02:36:52.148Z",
+    "videoAt": 736.307,
+    "sourceDigest": "b6c74ee6dd47912a9f1f9a18b34b41f4efd0bfbf95fc0bb932a4c6b9f7ff2b85"
+  },
+  {
+    "name": "first-write-approved",
+    "at": 736.011,
+    "recordedAt": "2026-09-26T02:36:52.538Z",
+    "videoAt": 736.696,
+    "sourceDigest": "c2c65cc5af9e5f58e689571b3dd70cedbc0585dee39a77f2d02818390872c257"
+  },
+  {
+    "name": "approval-ui",
+    "at": 810.907,
+    "recordedAt": "2026-09-26T02:38:07.434Z",
+    "videoAt": 811.591,
+    "sourceDigest": "c2c65cc5af9e5f58e689571b3dd70cedbc0585dee39a77f2d02818390872c257"
+  },
+  {
+    "name": "ui-write-approved",
+    "at": 811.221,
+    "recordedAt": "2026-09-26T02:38:07.748Z",
+    "videoAt": 811.906,
+    "sourceDigest": "f0fe57e2e8106e29ffc0fa28b5ea6eee32f28f35e0851fc8d4fcdbaa54d8761d"
+  },
+  {
+    "name": "approval-ui-followup",
+    "at": 921.412,
+    "recordedAt": "2026-09-26T02:39:57.939Z",
+    "videoAt": 922.097,
+    "sourceDigest": "f0fe57e2e8106e29ffc0fa28b5ea6eee32f28f35e0851fc8d4fcdbaa54d8761d"
+  },
+  {
+    "name": "approval-html",
+    "at": 955.703,
+    "recordedAt": "2026-09-26T02:40:32.230Z",
+    "videoAt": 956.387,
+    "sourceDigest": "d93c1e558ae21ae9c6421179753a558c85e27cefe327b88998b87cd418101681"
+  },
+  {
+    "name": "approval-styles",
+    "at": 998.337,
+    "recordedAt": "2026-09-26T02:41:14.864Z",
+    "videoAt": 999.021,
+    "sourceDigest": "ef478d3a04f58d68279ed74907b072b1b3dc7029ef93d03cf15e99e9f88bf97a"
+  },
+  {
+    "name": "approval-docs",
+    "at": 1064.707,
+    "recordedAt": "2026-09-26T02:42:21.234Z",
+    "videoAt": 1065.391,
+    "sourceDigest": "a690bdd4ecbcbdb5fbde9a54bb066c7410bae02576e538afa10ba249cc86b72a"
+  },
+  {
+    "name": "docs-write-approved",
+    "at": 1064.956,
+    "recordedAt": "2026-09-26T02:42:21.483Z",
+    "videoAt": 1065.64,
+    "sourceDigest": "1a13bde3f5da5f5f0beee80bc5e806d113d46586e73ca09360a5cc4d4546e1b7"
+  },
+  {
+    "name": "approval-server-guards",
+    "at": 1119.612,
+    "recordedAt": "2026-09-26T02:43:16.139Z",
+    "videoAt": 1120.295,
+    "sourceDigest": "1a13bde3f5da5f5f0beee80bc5e806d113d46586e73ca09360a5cc4d4546e1b7"
+  },
+  {
+    "name": "approval-product-tests",
+    "at": 1187.89,
+    "recordedAt": "2026-09-26T02:44:24.417Z",
+    "videoAt": 1188.574,
+    "sourceDigest": "3ca761c361bd973b1af8486674b9fc8bda48d569dcc669c00e88e07803913bb9"
+  },
+  {
+    "name": "tests-write-approved",
+    "at": 1188.207,
+    "recordedAt": "2026-09-26T02:44:24.734Z",
+    "videoAt": 1188.892,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "implementation-complete",
+    "at": 1281.809,
+    "recordedAt": "2026-09-26T02:45:58.336Z",
+    "videoAt": 1282.493,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "approval-tests",
+    "at": 1281.948,
+    "recordedAt": "2026-09-26T02:45:58.475Z",
+    "videoAt": 1282.632,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "tests-start",
+    "at": 1282.168,
+    "recordedAt": "2026-09-26T02:45:58.695Z",
+    "videoAt": 1282.853,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "approval-acceptance",
+    "at": 1315.488,
+    "recordedAt": "2026-09-26T02:46:32.015Z",
+    "videoAt": 1316.171,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "approval-cleanup",
+    "at": 1387.512,
+    "recordedAt": "2026-09-26T02:47:44.039Z",
+    "videoAt": 1388.196,
+    "sourceDigest": "d72a2d054d6386e27fb61c315d5beb0a43008857726854de4c63b58493530697"
+  },
+  {
+    "name": "approval-boundary-test",
+    "at": 1435.625,
+    "recordedAt": "2026-09-26T02:48:32.152Z",
+    "videoAt": 1436.309,
+    "sourceDigest": "179957a8e132ce8d31129dad37cefa40bb280903c77b5e1c8bc1a49448e91bf6"
+  },
+  {
+    "name": "approval-tests-rerun",
+    "at": 1498.912,
+    "recordedAt": "2026-09-26T02:49:35.439Z",
+    "videoAt": 1499.596,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "tests-final-start",
+    "at": 1499.133,
+    "recordedAt": "2026-09-26T02:49:35.660Z",
+    "videoAt": 1499.817,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "approval-acceptance-rerun",
+    "at": 1537.765,
+    "recordedAt": "2026-09-26T02:50:14.292Z",
+    "videoAt": 1538.448,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "tests-complete",
+    "at": 1606.307,
+    "recordedAt": "2026-09-26T02:51:22.834Z",
+    "videoAt": 1606.991,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "review-start",
+    "at": 1606.636,
+    "recordedAt": "2026-09-26T02:51:23.163Z",
+    "videoAt": 1607.32,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "approval-review-read",
+    "at": 1691.018,
+    "recordedAt": "2026-09-26T02:52:47.545Z",
+    "videoAt": 1691.702,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "approval-review-tests",
+    "at": 1776.034,
+    "recordedAt": "2026-09-26T02:54:12.561Z",
+    "videoAt": 1776.718,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "review-result",
+    "at": 1929.663,
+    "recordedAt": "2026-09-26T02:56:46.190Z",
+    "videoAt": 1930.35,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  },
+  {
+    "name": "final-summary",
+    "at": 2011.449,
+    "recordedAt": "2026-09-26T02:58:07.976Z",
+    "videoAt": 2012.133,
+    "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250"
+  }
+]

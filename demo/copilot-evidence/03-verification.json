@@ -1,0 +1,54 @@
+{
+  "engine": "github-copilot-cli",
+  "recordedAt": "2026-09-26T03:19:50.922Z",
+  "sourceDigest": "aafc8eada5839b7ab437da2ca1dcebc2a588f10d18b03184d71fab6fa30fc250",
+  "changedFiles": [
+    "README.md",
+    "public/app.mjs",
+    "public/index.html",
+    "public/styles.css",
+    "src/refunds.mjs",
+    "test/refunds.test.mjs"
+  ],
+  "workspaceUnchangedDuringTests": true,
+  "success": true,
+  "acceptanceSha256": "1365140a51727204b2590b310abe62c50d803ee6c9030420e411263a9bd4cf0b",
+  "checks": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "tests": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "test/refunds.test.mjs"
+      ],
+      "exitCode": 0,
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "$REPO/demo/refund-acceptance.test.mjs"
+      ],
+      "exitCode": 0,
+      "tests": 20,
+      "passed": 20,
+      "failed": 0
+    }
+  ],
+  "boundary": "Independent local execution against the recorded code. No production release approval."
+}

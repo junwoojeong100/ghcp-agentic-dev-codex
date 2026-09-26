@@ -1,0 +1,477 @@
+TAP version 13
+# Subtest: AC-1: policy, fixture values and total amount remain explicit
+not ok 1 - AC-1: policy, fixture values and total amount remain explicit
+  ---
+  duration_ms: 2.456834
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:24:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:26:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: AC-1: threshold behavior at 35000 KRW
+ok 2 - AC-1: threshold behavior at 35000 KRW
+  ---
+  duration_ms: 1.994833
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 999999 KRW
+ok 3 - AC-1: threshold behavior at 999999 KRW
+  ---
+  duration_ms: 0.581834
+  type: 'test'
+  ...
+# Subtest: AC-1: threshold behavior at 1000000 KRW
+not ok 4 - AC-1: threshold behavior at 1000000 KRW
+  ---
+  duration_ms: 0.560916
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:35:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    200 !== 202
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 202
+  actual: 200
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:40:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-1: threshold behavior at 1200000 KRW
+not ok 5 - AC-1: threshold behavior at 1200000 KRW
+  ---
+  duration_ms: 0.343375
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:35:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    200 !== 202
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 202
+  actual: 200
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:40:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-2: a pending refund cannot be completed by requesting again
+not ok 6 - AC-2: a pending refund cannot be completed by requesting again
+  ---
+  duration_ms: 0.730167
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:48:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'completed'
+    - 'pending_approval'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'pending_approval'
+  actual: 'completed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:51:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-3: self approve is rejected by the service
+not ok 7 - AC-3: self approve is rejected by the service
+  ---
+  duration_ms: 0.4365
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:57:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 403
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 403
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:59:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-3: other support actor cannot approve
+not ok 8 - AC-3: other support actor cannot approve
+  ---
+  duration_ms: 0.368583
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:62:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 403
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 403
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:63:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-3: self reject is rejected by the service
+not ok 9 - AC-3: self reject is rejected by the service
+  ---
+  duration_ms: 0.594334
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:57:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 403
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 403
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:59:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-3: other support actor cannot reject
+not ok 10 - AC-3: other support actor cannot reject
+  ---
+  duration_ms: 1.053542
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:62:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 403
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 403
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:63:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-3: initiation is limited to support roles, consistently with the UI
+not ok 11 - AC-3: initiation is limited to support roles, consistently with the UI
+  ---
+  duration_ms: 1.06975
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:67:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    200 !== 403
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 403
+  actual: 200
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:70:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-4: a different approver completes exactly once
+not ok 12 - AC-4: a different approver completes exactly once
+  ---
+  duration_ms: 0.271291
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:78:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 200
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 200
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:81:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-4: rejection requires a reason and is terminal
+not ok 13 - AC-4: rejection requires a reason and is terminal
+  ---
+  duration_ms: 0.204042
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:94:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    409 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 409
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:19:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:97:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-4: decisions cannot precede an approval request
+not ok 14 - AC-4: decisions cannot precede an approval request
+  ---
+  duration_ms: 0.153958
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:108:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'CONTROL_NOT_IMPLEMENTED'
+    - 'INVALID_STATE'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'INVALID_STATE'
+  actual: 'CONTROL_NOT_IMPLEMENTED'
+  operator: 'strictEqual'
+  stack: |-
+    expectError (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:20:10)
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:109:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-5: audit records preserve actor, amount, outcome, order and timestamp
+not ok 15 - AC-5: audit records preserve actor, amount, outcome, order and timestamp
+  ---
+  duration_ms: 0.242292
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:112:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 3
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 3
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:117:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-6: executive metrics derive from actual pending and completed state
+not ok 16 - AC-6: executive metrics derive from actual pending and completed state
+  ---
+  duration_ms: 0.192334
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:130:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:135:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-7: actor and amount spoofing cannot bypass the policy
+not ok 17 - AC-7: actor and amount spoofing cannot bypass the policy
+  ---
+  duration_ms: 0.246708
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:141:1'
+  failureType: 'testCodeFailure'
+  error: "An identified actor's amount-tampering attempt must be audited."
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:145:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-7: external mutation cannot change refunds, actors or audit entries
+not ok 18 - AC-7: external mutation cannot change refunds, actors or audit entries
+  ---
+  duration_ms: 0.469209
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:158:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot set properties of undefined (setting 'actorId')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:162:30)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: AC-8: reset restores state and event sequence while instances stay isolated
+not ok 19 - AC-8: reset restores state and event sequence while instances stay isolated
+  ---
+  duration_ms: 0.37475
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:170:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'id')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:172:43)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: HTTP integration: real routes, assets, policy, blocked and approved requests
+not ok 20 - HTTP integration: real routes, assets, policy, blocked and approved requests
+  ---
+  duration_ms: 56.686791
+  type: 'test'
+  location: '/Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:182:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    200 !== 202
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 202
+  actual: 200
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/test/acceptance.test.mjs:193:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 2
+# fail 18
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 253.7925

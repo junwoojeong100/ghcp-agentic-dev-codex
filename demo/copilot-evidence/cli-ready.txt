@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+╭────────────────────────────────────────────────────────────────────────────────────────────────────────────╮  
+│                                                                                                            │  
+│  ╭─╮╭─╮                            │  Getting started                                                      │  
+│  ╰─╯╰─╯  Copilot v1.0.88 uses AI.  │  Use the tabs above to explore your sessions and pull requests        │  
+│  █ ▘▝ █  Check for mistakes.       │  /init — Initialize Copilot instructions for this repository          │  
+│   ▔▔▔▔                             │  /model — Switch models across providers, or use Auto                 │  
+│                                                                                                            │  
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯  
+
+ ● Tip: /app
+   └ Prefer a visual workspace? Try out the GitHub Copilot desktop app
+      https://github.com/features/ai/github-app 
+
+ ● Disabled tools: fetch_copilot_cli_documentation, list_bash, session_store_sql, skill, sql, web_fetch, 
+   write_agent
+
+ ● MCP Servers reloaded: 0 servers connected
+
+
+
+
+ ~/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace [⎇ demo]                  Session: 0 AIC used 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ ← open sidebar · / commands · ? help · tab next tab                                                       Auto 

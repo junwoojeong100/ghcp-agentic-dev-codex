@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│ 111 +       const response = service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-          │
+│         kim", ...extra });                                                                                   │
+│ 112 +       assert.equal(response.status, 400);                                                              │
+│ 113 +       assert.equal(response.body.error.code, "INVALID_REQUEST");                                       │
+│ 114 +     }                                                                                                  │
+│ 115 +     const events = service.handle("GET", "/api/refunds").body.events;                                  │
+│ 116 +     assert.deepEqual(events.map(({ id }) => id), [1, 2]);                                              │
+│ 117 +     assert.ok(events.every((event) => event.outcome === "blocked" && event.amount === 1_200_000 &&     │
+│         event.reason.trim()));                                                                               │
+│ 118 +     service.handle("POST", "/api/demo/reset", {});                                                     │
+│ 119 +     assert.deepEqual(service.handle("GET", "/api/refunds").body.events, []);                           │
+│ 120 +     assert.equal(service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-                │
+│         kim" }).status, 202);                                                                                │
+│ 121 +     assert.equal(service.handle("GET", "/api/refunds").body.events[0].id, 1);                          │
+│ 122 +   });                                                                                                  │
+│ 123 +                                                                                                        │
+│                                                                                                              │
+│ Do you want to update /Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/     │
+│ test/refunds.test.mjs?                                                                                       │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. Yes, and don't ask again for file operations when in this repo (~/GitHub/.../workspace)                 │
+│   3. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

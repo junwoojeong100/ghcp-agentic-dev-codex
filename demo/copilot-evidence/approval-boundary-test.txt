@@ -1,0 +1,28 @@
+  Current   Sessions   Issues   Pull requests   Gists 
+
+│ 72       seed[2].amount = 999_999;                                                                           │
+│ 73 -     const service = createRefundService({ seed });                                                      │
+│ 74 -     assert.equal(service.handle("POST", "/api/refunds/RF-2403/process", { actorId: "cs-kim" }).status,  │
+│        200);                                                                                                 │
+│ 75 -     assert.equal(service.handle("POST", "/api/refunds/RF-2401/process", { actorId: "cs-kim" }).status,  │
+│        202);                                                                                                 │
+│ 73 +     const belowThreshold = createRefundService({ seed });                                               │
+│ 74 +     assert.equal(belowThreshold.handle("POST", "/api/refunds/RF-2403/process", { actorId: "cs-          │
+│        kim" }).status, 200);                                                                                 │
+│ 75 +     seed[2].amount = 1_000_000;                                                                         │
+│ 76 +     const atThreshold = createRefundService({ seed });                                                  │
+│ 77 +     assert.equal(atThreshold.handle("POST", "/api/refunds/RF-2403/process", { actorId: "cs-             │
+│        kim" }).status, 202);                                                                                 │
+│ 78     });                                                                                                   │
+│ 79                                                                                                           │
+│ 80     test("requester role, self-approval, and approver role failures are audited", () => {                 │
+│                                                                                                              │
+│ Do you want to update /Users/junwoojeong/GitHub/ghcp-agentic-dev-codex/.demo-runs/ghcp-cxo-03/workspace/     │
+│ test/refunds.test.mjs?                                                                                       │
+│                                                                                                              │
+│ ❯ 1. Yes                                                                                                     │
+│   2. Yes, and don't ask again for file operations when in this repo (~/GitHub/.../workspace)                 │
+│   3. No, and tell Copilot what to do differently (Esc to stop)                                               │
+│                                                                                                              │
+│ ↑/↓ to navigate · enter to select · esc to cancel                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
