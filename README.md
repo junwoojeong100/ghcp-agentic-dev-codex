@@ -7,11 +7,14 @@ CXO 고객에게 GitHub Copilot의 **개발 실행력, 검토 근거, 조직의 
 ## 발표 자료
 
 - [한국어 5분 영상](delivery/github-copilot-cxo-demo-ko-v2.mp4): 1080p MP4, 실제 CLI 화면 156초, 합성 내레이션·자막·챕터
-- [CXO PowerPoint](delivery/github-copilot-cxo-agent-workflow.pptx): 경영 가치 → 실제 시연 → 조직 적용 → 파일럿 제안
+- [CXO PowerPoint](delivery/github-copilot-cxo-agent-workflow%20%20-%20%20Repaired.pptx): 18장 · Copilot 개념·서피스·모드·에이전트 기능 → 경영 가치 → 실제 시연 → 조직 적용
 - [브라우저 슬라이드](delivery/slides.html): 오프라인 열기, 방향키로 이동
 - [발표·실행 가이드](delivery/copilot-cxo-demo-guide.md)
 - [한국어 자막](delivery/github-copilot-cxo-demo-ko-v2.srt), [영상 대본](delivery/video-script.md)
 - [원본 터미널 스트림](demo/copilot-evidence/terminal.cast), [실행 근거](demo/copilot-evidence/manifest.json)
+
+PPT 표지 다음의 2–6장은 제품 소개다. IDE·GitHub.com·CLI·데스크톱 앱·모바일, 서피스별 모드, 클라우드 위임·리뷰·병렬 작업, 팀 지침·Custom agents·Skills·MCP·Agentic Workflows를 구분한다. 지원 범위와 Preview 표시는 2026-09-26 공식 문서 기준이며, 소개한 모든 기능을 데모에서 실행한 것은 아니다.
+기존 5분 영상과 시연 코드는 유지했다. PPT에 추가한 소개 5장은 영상에 포함되지 않는다.
 
 영상은 실제 로컬 실행을 편집한 사전 녹화물이다. **5분은 영상 길이이며 개발 소요 시간이 아니다.**
 금액과 고객은 합성 데이터이고 실제 결제는 없다. 터미널 본문은 실행 중인 `copilot`의 PTY 출력을 그대로 표시한 것으로, 만들어 넣은 대화나 CLI 모형이 아니다.
@@ -71,4 +74,4 @@ npm run demo:copilot -- replay check-01
 기본 테스트는 시연 실행기와 시작 상태의 회귀 검증이다. `replay`는 완성한 제품과 독립 인수 테스트를 함께 재실행한다.
 슬라이드의 텍스트와 도식은 편집 가능하다. Nanum Gothic 글꼴이 없는 환경에서는 글꼴 대체로 줄바꿈이 달라질 수 있으므로 영상이나 브라우저 슬라이드를 대체 자료로 사용한다.
 
-기존 파일 전달형 역할 데모(`demo/workflow.mjs`, `demo/fallback`)와 이전 버전 산출물은 비교용으로 보존했다. 이번 고객 발표에는 위 링크의 새 영상과 PPT를 사용한다.
+이전 버전 발표 자료와 사용하지 않는 생성 스크립트는 정리했다. `demo/workflow.mjs`의 공통 준비 로직과 파일 전달형 데모의 재현 자료(`demo/agents`, `demo/fallback`)는 유지한다. 고객 발표에는 위 링크의 최신 영상과 복구된 PPT를 사용한다.

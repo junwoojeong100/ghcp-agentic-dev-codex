@@ -8,7 +8,7 @@
 
 ## 발표 자료와 진행
 
-- `github-copilot-cxo-agent-workflow.pptx`: 13장. 경영 가치, 정책 요청, 실제 실행, 조직 적용, 파일럿 순서다.
+- `github-copilot-cxo-agent-workflow  -  Repaired.pptx`: 현재 발표용 복구본 18장. 표지 → 제품 소개 5장 → 기존 경영 가치·정책 요청·실행·조직 적용·파일럿 순서다.
 - `github-copilot-cxo-demo-ko-v2.mp4`: 한국어 5분 영상. 실제 CLI 장면 156초, 내레이션·화면 자막·선택형 자막·18개 챕터를 포함한다.
 - `slides.html`: 오프라인 브라우저 발표용. 방향키로 이동한다.
 - `../demo/copilot-evidence/terminal.cast`: 원본 터미널 스트림. 중간 대기·차단·재지시도 보존한다.
@@ -22,6 +22,22 @@
 | 04:34–05:00 | 팀 적용과 마무리 | 고객 업무 하나에서 효과를 확인한 뒤 확대 |
 
 권장 멘트: “개발자가 파일마다 코드를 받아 옮기는 대신, Copilot이 작업을 연결하고 개발자는 의도·권한·결과를 검토합니다.”
+
+## 발표 서두: 제품 소개 5장
+
+표지 뒤에 개념을 먼저 소개한 뒤 7장의 경영 가치와 기존 데모로 이어 간다. 기존 5분 영상은 변경하지 않았으며 아래 소개는 PPT에만 추가했다.
+
+| PPT | 소개 내용 | 설명할 핵심 |
+| --- | --- | --- |
+| 2 | GitHub Copilot은 무엇인가 | 코드 이해·작성·검토·작업 실행을 돕는 AI 개발 도우미이며 특정 모델 하나가 아님 |
+| 3 | 주요 서피스 | IDE, GitHub.com, CLI, GitHub Copilot app, GitHub Mobile은 사용하는 화면·도구의 차이 |
+| 4 | 모드와 자율성 | IDE의 Ask·Edit·Plan·Agent와 CLI/app의 Interactive·Plan·Autopilot을 구분 |
+| 5 | 에이전트의 개발 작업 | 로컬 구현·검증, Cloud agent, 코드 리뷰, Subagents·CLI /fleet |
+| 6 | 팀 맞춤 확장과 자동화 | Custom instructions, Custom agents, Agent skills, MCP, GitHub Agentic Workflows |
+
+“서피스는 어디서 쓰는가, 모드는 어떻게 함께 일하는가, 에이전트 기능은 어떤 일을 맡기는가입니다”라고 구분하면 이해하기 쉽다. Edit를 포함한 모드 지원과 기본값은 IDE·버전에 따라 다르며, 모드를 선택했다고 실행 권한을 무제한으로 준 것은 아니다. Autopilot의 로컬 연속 실행과 Cloud agent의 원격 위임도 다른 기능이다.
+
+GitHub Agentic Workflows는 **Public preview**인 별도 GitHub Actions 기반 자동화 기능이다. 제품 소개는 2026-09-26 공식 문서를 기준으로 작성했고 각 슬라이드의 발표자 노트에 근거를 넣었다. 플랜·조직 정책·클라이언트별 지원 범위를 확인한다. Cloud agent·PR 리뷰·/fleet·MCP·Skills·Agentic Workflows를 이번 영상에서 실행했다고 설명하지 않는다.
 
 ## 실제 CLI와 승인 장면의 의미
 
@@ -96,7 +112,7 @@ npm run demo:copilot -- mark recording-01 plan-ready
 node video/capture-app.mjs recording-01
 npm run demo:copilot -- freeze recording-01
 node video/prepare-clips.mjs recording-01
-node presentation/build.mjs cxo-v3
+node presentation/build.mjs cxo-next
 node presentation/capture-slides.mjs
 node video/prepare-audio.mjs
 python3 video/captions.py
@@ -104,6 +120,7 @@ node video/render.mjs
 ```
 
 필요한 장면 마커와 구간 선택은 `video/prepare-clips.mjs`에 정의돼 있다. 녹화의 결과와 다른 자막·숫자를 사용하지 않는다. PPT 전체 렌더와 텍스트·영역 검사는 `presentation/check-render.py`로 수행한다. 브라우저 슬라이드 이미지 생성은 `presentation/capture-slides.mjs`를 사용한다.
+빌드에는 기존 출력과 겹치지 않는 새 revision 이름을 사용한다. 영상용 슬라이드는 페이지 번호 대신 `slide-cover`, `slide-value`, `slide-policy`, `slide-scale`, `slide-close`라는 고정 이름으로 연결하므로 소개 슬라이드를 추가해도 원래 장면이 유지된다. 영상 재빌드 때에는 위 순서대로 timeline도 다시 생성한다.
 
 ## 근거와 운영 경계
 
@@ -117,6 +134,15 @@ PPT의 텍스트·도식·표는 편집 가능하다. Nanum Gothic이 없는 환
 
 ## 공식 근거
 
+- [GitHub Copilot 개요](https://docs.github.com/en/copilot/get-started/about-github-copilot)
+- [IDE 모드와 사용법](https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-ide)
+- [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app)
+- [GitHub Mobile](https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-mobile)
+- [Copilot cloud agent](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent)
+- [Copilot code review](https://docs.github.com/en/copilot/concepts/agents/code-review)
+- [Autopilot](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/autopilot), [Subagents와 /fleet](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/speed-up-task-completion)
+- [Custom agents](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-custom-agents), [Agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [MCP](https://docs.github.com/en/copilot/concepts/context/mcp)
+- [GitHub Agentic Workflows · Public preview](https://docs.github.com/en/copilot/concepts/agents/about-github-agentic-workflows)
 - [Copilot CLI 개요](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli)
 - [CLI 사용과 Plan mode](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
 - [도구 사용 승인과 거부](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools)

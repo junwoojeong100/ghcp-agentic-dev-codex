@@ -1,10 +1,10 @@
 export const scenes = [
   {
-    id: "01-opening", duration: 12, source: "slide-1", chapter: "비즈니스 요청을 제품 변경으로",
+    id: "01-opening", duration: 12, source: "slide-cover", chapter: "비즈니스 요청을 제품 변경으로",
     narration: "사업 정책이 바뀌면 서비스는 얼마나 빠르게 바뀔 수 있을까요? 깃허브 코파일럿이 하나의 요청을 실제 코드 변경과 검토 근거로 연결하는 과정을 보겠습니다.",
   },
   {
-    id: "02-value", duration: 12, source: "slide-2", chapter: "실행력 · 품질 확인 · 조직 통제",
+    id: "02-value", duration: 12, source: "slide-value", chapter: "실행력 · 품질 확인 · 조직 통제",
     narration: "핵심은 코드 자동 완성만이 아닙니다. 계획과 구현, 테스트와 리뷰를 연결하면서 사용자가 실행 권한을 결정합니다. 개발자는 판단이 필요한 일에 집중할 수 있습니다.",
   },
   {
@@ -12,7 +12,7 @@ export const scenes = [
     narration: "현재 환불 화면에서는 백이십만 원도 바로 처리됩니다. 별도 승인과 감사 이력이 없습니다. 고객과 금액은 합성 데이터이며 실제 돈은 이동하지 않습니다.",
   },
   {
-    id: "04-policy", duration: 12, source: "slide-3", chapter: "경영진의 정책 요청",
+    id: "04-policy", duration: 12, source: "slide-policy", chapter: "경영진의 정책 요청",
     narration: "요청은 분명합니다. 백만 원 이상은 다른 담당자가 승인하고, 소액 처리는 유지합니다. 요청과 결정, 차단 시도는 이력으로 남겨야 합니다. 이것이 완료 기준입니다.",
   },
   {
@@ -64,11 +64,11 @@ export const scenes = [
     narration: "삼만 오천 원은 기존처럼 즉시 처리됩니다. 모든 업무에 승인 단계를 늘리지 않고 정한 정책에 맞춰 변경한 것입니다. 감사 화면에서는 누가 요청하고 차단되었으며 승인했는지 확인할 수 있습니다.",
   },
   {
-    id: "17-scale", duration: 12, source: "slide-10", chapter: "개인의 사용을 팀의 개발 방식으로",
+    id: "17-scale", duration: 12, source: "slide-scale", chapter: "개인의 사용을 팀의 개발 방식으로",
     narration: "깃허브 코파일럿은 저장소 지침과 기존 개발 흐름에 연결됩니다. 팀의 기준을 공유하고 조직에 허용된 기능과 모델을 사용하면서 효과가 확인된 업무부터 확대할 수 있습니다.",
   },
   {
-    id: "18-close", duration: 14, source: "slide-13", chapter: "실행은 Copilot이 · 결정은 조직이",
+    id: "18-close", duration: 14, source: "slide-close", chapter: "실행은 Copilot이 · 결정은 조직이",
     narration: "실행은 코파일럿이, 기준과 결정은 조직이 담당합니다. 작은 내부 업무부터 완료 시간과 재작업, 검토 부담을 함께 측정해 보세요. 오늘의 오 분은 편집된 영상 길이이며 개발 시간이나 성과 수치는 아닙니다.",
   },
 ];

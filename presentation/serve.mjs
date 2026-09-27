@@ -4,7 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const allowed = { "/": "delivery/slides.html", "/slides.html": "delivery/slides.html", "/evidence.html": ".build/video/evidence.html" };
+const allowed = { "/": "delivery/slides.html", "/slides.html": "delivery/slides.html" };
 const port = Number(process.argv[2] ?? 4275);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("Invalid local preview port.");
 const server = createServer(async (request,response)=>{

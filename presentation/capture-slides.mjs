@@ -12,8 +12,9 @@ try {
   await page.goto(pathToFileURL(join(ROOT, "delivery/slides.html")).href + "?video=1");
   await page.evaluate(() => document.fonts.ready);
   const count = await page.locator(".slide").count();
-  if (count !== 13) throw new Error("The CXO deck must contain 13 slides.");
+  if (count !== 18) throw new Error("The CXO deck must contain the cover, five introduction slides and twelve demo slides.");
   const report = [];
+  const videoSources = new Set();
   for (let i = 1; i <= count; i++) {
     await page.evaluate((number) => { location.hash = String(number); }, i);
     await page.locator(`.slide[data-slide="${i}"]`).waitFor({ state: "visible" });
@@ -29,8 +30,15 @@ try {
       }
       return errors;
     }));
-    await page.screenshot({ path: join(output, `slide-${i}.png`) });
-    report.push({ slide: i, issues });
+    const screenshot = await page.screenshot();
+    await fs.writeFile(join(output, `slide-${i}.png`), screenshot);
+    const videoSource = await page.locator(`.slide[data-slide="${i}"]`).getAttribute("data-video-source");
+    if (videoSource) {
+      if (!/^slide-[a-z]+(?:-[a-z]+)*$/.test(videoSource) || videoSources.has(videoSource)) throw new Error(`Invalid or duplicate video slide reference: ${videoSource}`);
+      videoSources.add(videoSource);
+      await fs.writeFile(join(output, `${videoSource}.png`), screenshot);
+    }
+    report.push({ slide: i, videoSource, issues });
   }
   await fs.writeFile(join(ROOT, ".build/copilot/slide-layout.json"), JSON.stringify(report, null, 2));
   const failures = report.filter((item) => item.issues.length);
